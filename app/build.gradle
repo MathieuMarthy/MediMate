@@ -5,10 +5,13 @@ plugins {
     id 'kotlinx-serialization'
 }
 
+kotlin {
+    version = "1.7.1"
+}
+
 android {
     namespace 'com.example.mms'
     compileSdk 33
-    ext.kotlin_version = '1.9.0'
 
     defaultConfig {
         applicationId "com.example.mms"
