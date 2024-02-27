@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
@@ -19,10 +19,22 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
+        
+    - name: Setup Kotlin
+      uses: fwilhe2/setup-kotlin@main
+      with:
+        kotlin-version: '1.7.1'
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
+      
+    - name: Build
       run: ./gradlew build
-    - name: Run Tests
+      
+    - name: Unit Test
+    - name: Run tests
       run: ./gradlew test
+      
+    - name: Unit Test
+      run: ./gradlew testDebugUnitTest
+    
