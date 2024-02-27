@@ -19,10 +19,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
+        
+    - name: Setup Kotlin
+      uses: fponticelli/action-kotlin-jvm@v2
+      with:
+        kotlin-version: '1.7.1'
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build --info
-    - name: Run Tests
-      run: ./gradlew test
