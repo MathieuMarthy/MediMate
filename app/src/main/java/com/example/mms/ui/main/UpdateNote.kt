@@ -2,9 +2,7 @@ package com.example.mms.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mms.databinding.ActivityAddNoteBinding
 import com.example.mms.databinding.ActivityUpdateNoteBinding
 
 class UpdateNote : AppCompatActivity() {
@@ -33,7 +31,10 @@ class UpdateNote : AppCompatActivity() {
 
         // When button delete clicked, send code = RESULT_OK (-1), and the position
         binding.deleteButton.setOnClickListener {
-            val deleteValue = Intent().putExtra("delete", "deleteOk").putExtra("position", position)
+            val deleteValue = Intent()
+                .putExtra("delete", "deleteOk")
+                .putExtra("position", position)
+                .putExtra("id", id)
             setResult(AppCompatActivity.RESULT_OK, deleteValue)
             finish()
         }
