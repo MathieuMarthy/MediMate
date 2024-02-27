@@ -5,10 +5,6 @@ plugins {
     id 'kotlinx-serialization'
 }
 
-kotlin {
-    version = "1.7.1"
-}
-
 android {
     namespace 'com.example.mms'
     compileSdk 33
@@ -35,6 +31,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '17'
+        ext.kotlin_version = "1.7.1"
     }
     buildFeatures {
         viewBinding true
