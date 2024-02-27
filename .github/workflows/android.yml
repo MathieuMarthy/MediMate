@@ -21,7 +21,7 @@ jobs:
         cache: gradle
         
     - name: Setup Kotlin
-      uses: fponticelli/action-kotlin-jvm@v2
+      uses: fwilhe2/setup-kotlin@main
       with:
         kotlin-version: '1.7.1'
 
