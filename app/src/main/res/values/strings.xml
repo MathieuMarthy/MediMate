@@ -265,4 +265,7 @@
     <string name="information_type">Type :</string>
     <string name="information_compo">Composition :</string>
     <string name="information_usage">Usage :</string>
+    <string name="Posology">Posologie</string>
+    <string name="Pregnancy">Grossesse</string>
+    <string name="Drive">Conduite</string>
 </resources>

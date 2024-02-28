@@ -9,10 +9,11 @@ import com.example.mms.R
 import com.example.mms.Utils.truncString
 import com.example.mms.model.Doctor
 import com.example.mms.model.Interaction
+import com.example.mms.model.ShoawbleItem
 
 
 class SideEffectsAdapter(
-    private val items: List<Interaction>
+    private val items: List<ShoawbleItem>
 ) : RecyclerView.Adapter<SideEffectsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,8 +25,8 @@ class SideEffectsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.name.text = item.substanceName
-        holder.message.text = item.type
+        holder.name.text = item.title
+        holder.message.text = item.content
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

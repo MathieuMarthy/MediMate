@@ -26,6 +26,7 @@ import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.FragmentAddRecapBinding
 import com.example.mms.model.Cycle
 import com.example.mms.model.Interaction
+import com.example.mms.model.SideEffects
 import com.example.mms.model.Task
 import com.example.mms.model.medicines.Medicine
 import com.example.mms.service.NotifService
@@ -96,10 +97,14 @@ class AddMedicamentRecapFragment : Fragment() {
 
 
         if (sideEffects != null && sideEffects.isNotEmpty()) {
-            binding.btnEffetsSecondaires.visibility = View.VISIBLE
+            binding.btnSideEffects.visibility = View.VISIBLE
+
+            binding.btnSideEffects.setOnClickListener {
+                this.openSideEffectsDialog(sideEffects)
+            }
 
             if (!sideEffects.pregnancy.isNullOrEmpty()) {
-                binding.imageVoiture.visibility = View.VISIBLE
+                binding.imageEnceinte.visibility = View.VISIBLE
             }
             if (!sideEffects.drive.isNullOrEmpty()) {
                 binding.imageVoiture.visibility = View.VISIBLE
@@ -149,9 +154,6 @@ class AddMedicamentRecapFragment : Fragment() {
             binding.hourTask.text = ""
         }
 
-        binding.btnEffetsSecondaires.setOnClickListener {
-            this.openSideEffectsDialog()
-        }
 
         binding.btnEffetsSecondaires.setOnClickListener {
             this.openInteractionsDialog()
@@ -264,7 +266,6 @@ class AddMedicamentRecapFragment : Fragment() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-
     }
 
     /**
@@ -281,7 +282,7 @@ class AddMedicamentRecapFragment : Fragment() {
     }
 
     private fun openInteractionsDialog() {
-        val interactionsAdapters = InteractionsAdapter(interactions)
+        val interactionsAdapters = InteractionsAdapter(this.interactions)
 
         this.openDialog(
             interactionsAdapters,
@@ -291,8 +292,9 @@ class AddMedicamentRecapFragment : Fragment() {
         )
     }
 
-    private fun openSideEffectsDialog() {
-        val sideEffectsAdapters = SideEffectsAdapter(interactions)
+    private fun openSideEffectsDialog(sideEffects: SideEffects) {
+        val items = sideEffects.getShowableItems(requireContext())
+        val sideEffectsAdapters = SideEffectsAdapter(items)
 
         this.openDialog(
             sideEffectsAdapters,

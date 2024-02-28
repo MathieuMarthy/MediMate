@@ -21,13 +21,9 @@ class SideEffectsService(context: Context) {
             SideEffects(
                 fullInfoUrl = medicineSideEffects["full_info_url"] ?: "",
                 posology = medicineSideEffects["posology"],
-                contraindications = medicineSideEffects["contraindications"],
-                specialWarningsAndPrecautions = medicineSideEffects["special_warnings_and_precautions"],
-                interactionsOtherMedicines = medicineSideEffects["interactions_other_medicines"],
                 pregnancy = medicineSideEffects["pregnancy"],
                 drive = medicineSideEffects["drive"],
-                sideEffects = medicineSideEffects["side_effects"],
-                shelfLife = medicineSideEffects["shelf_life"]
+                sideEffects = medicineSideEffects["side_effects"]
             )
         }
     }

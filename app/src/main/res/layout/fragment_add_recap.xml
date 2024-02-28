@@ -184,7 +184,7 @@
         android:paddingEnd="10dp"
         android:text="@string/effets_secondaires"
         android:textAllCaps="false"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/name_medicine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.823"

@@ -252,4 +252,7 @@
     <string name="information_code_cis">Code CIS :</string>
     <string name="information_compo">Composition :</string>
     <string name="information_usage">Usage :</string>
+    <string name="Posology">Posology</string>
+    <string name="Pregnancy">Pregnancy</string>
+    <string name="Drive">Drive</string>
 </resources>
