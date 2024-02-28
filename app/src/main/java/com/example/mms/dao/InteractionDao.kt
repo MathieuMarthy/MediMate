@@ -1,12 +1,12 @@
 package com.example.mms.dao
 
 import android.content.Context
-import com.example.mms.database.jsonMedicines.MedicineJsonDatabase
+import com.example.mms.database.jsonMedicines.JsonDatabase
 import com.example.mms.model.Interaction
 import com.example.mms.model.medicines.Medicine
 
 class InteractionDao(context: Context) {
-    private val interactions = MedicineJsonDatabase(context).getInteractions()
+    private val interactions = JsonDatabase(context).getInteractions()
 
     fun thisMedicineInteractsWith(medicine: Medicine, othersMedicines: List<Medicine>): List<Interaction> {
 

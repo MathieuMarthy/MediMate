@@ -2,7 +2,9 @@ package com.example.mms.model.medicines
 
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.example.mms.model.SideEffects
 import kotlinx.serialization.Serializable
 
 @Entity
@@ -27,6 +29,9 @@ data class Medicine constructor(
     var availability: Availbility?,
     @Embedded(prefix = "generic_group_")
     var generic_group: GenericGroup?,
+
+    @Ignore
+    var sideEffects: SideEffects? = null
 ) {
 
     constructor() : this(

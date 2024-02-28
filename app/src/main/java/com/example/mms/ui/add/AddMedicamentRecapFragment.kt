@@ -19,15 +19,18 @@ import com.example.mms.Utils.getFormattedDate
 import com.example.mms.Utils.goToInAddFragments
 import com.example.mms.adapter.InteractionsAdapter
 import com.example.mms.adapter.RecapSpecificDaysAdapter
+import com.example.mms.adapter.SideEffectsAdapter
 import com.example.mms.dao.InteractionDao
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.FragmentAddRecapBinding
 import com.example.mms.model.Cycle
 import com.example.mms.model.Interaction
+import com.example.mms.model.SideEffects
 import com.example.mms.model.Task
 import com.example.mms.model.medicines.Medicine
 import com.example.mms.service.NotifService
+import com.example.mms.service.SideEffectsService
 import com.example.mms.service.TasksService
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -37,6 +40,7 @@ class AddMedicamentRecapFragment : Fragment() {
     private var _binding: FragmentAddRecapBinding? = null
     private val binding get() = _binding!!
     private lateinit var tasksService: TasksService
+    private lateinit var sideEffectsService: SideEffectsService
     private lateinit var viewModel: SharedAMViewModel
 
     private lateinit var saveFunction: (Task) -> Unit
@@ -88,6 +92,26 @@ class AddMedicamentRecapFragment : Fragment() {
             binding.imageDanger.visibility = View.VISIBLE
         }
 
+        this.sideEffectsService = SideEffectsService(requireContext())
+        val sideEffects = this.sideEffectsService.getSideEffectsByMedicineId(medicine.code_cis)
+
+
+        if (sideEffects != null && sideEffects.isNotEmpty()) {
+            binding.btnSideEffects.visibility = View.VISIBLE
+
+            binding.btnSideEffects.setOnClickListener {
+                this.openSideEffectsDialog(sideEffects)
+            }
+
+            if (!sideEffects.pregnancy.isNullOrEmpty()) {
+                binding.imageEnceinte.visibility = View.VISIBLE
+            }
+            if (!sideEffects.drive.isNullOrEmpty()) {
+                binding.imageVoiture.visibility = View.VISIBLE
+            }
+        }
+
+
         if (cycle != null) {
             // Cycle
             saveFunction = { addedTask ->
@@ -129,6 +153,7 @@ class AddMedicamentRecapFragment : Fragment() {
             binding.intervalTask.text = task.type
             binding.hourTask.text = ""
         }
+
 
         binding.btnEffetsSecondaires.setOnClickListener {
             this.openInteractionsDialog()
@@ -241,7 +266,6 @@ class AddMedicamentRecapFragment : Fragment() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-
     }
 
     /**
@@ -258,16 +282,42 @@ class AddMedicamentRecapFragment : Fragment() {
     }
 
     private fun openInteractionsDialog() {
-        val interactionsAdapters = InteractionsAdapter(interactions)
+        val interactionsAdapters = InteractionsAdapter(this.interactions)
 
+        this.openDialog(
+            interactionsAdapters,
+            R.id.rv_interactions,
+            R.layout.custom_dialog_interaction,
+            R.id.btn_close_interactions
+        )
+    }
+
+    private fun openSideEffectsDialog(sideEffects: SideEffects) {
+        val items = sideEffects.getShowableItems(requireContext())
+        val sideEffectsAdapters = SideEffectsAdapter(items)
+
+        this.openDialog(
+            sideEffectsAdapters,
+            R.id.rv_side_effects,
+            R.layout.custom_dialog_side_effects,
+            R.id.btn_close_side_effects
+        )
+    }
+
+    private fun openDialog(
+        adapter: RecyclerView.Adapter<*>,
+        recyclerViewId: Int,
+        layout: Int,
+        closeButtonId: Int
+    ) {
         val dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.custom_dialog_interaction)
+        dialog.setContentView(layout)
 
-        val recyclerView = dialog.findViewById<RecyclerView>(R.id.rv_interactions)
-        recyclerView.adapter = interactionsAdapters
+        val recyclerView = dialog.findViewById<RecyclerView>(recyclerViewId)
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
 
-        val btnClose = dialog.findViewById<View>(R.id.btn_close_interactions)
+        val btnClose = dialog.findViewById<View>(closeButtonId)
         btnClose.setOnClickListener {
             dialog.dismiss()
         }

@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.mms.R
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
-import com.example.mms.database.jsonMedicines.MedicineJsonDatabase
+import com.example.mms.database.jsonMedicines.JsonDatabase
 import com.example.mms.databinding.LoaderBinding
 import com.example.mms.broadcast.MidnightAlarmReceiver
 import com.example.mms.model.User
@@ -54,17 +54,11 @@ class LoaderActivity : AppCompatActivity() {
 
         Thread {
             val mediDB = db.medicineDao()
-            val sideEffectsDB = db.sideEffectsDao()
 
             if (mediDB.getNbElements() == 0) {
-                val mediJsDb = MedicineJsonDatabase(this)
+                val mediJsDb = JsonDatabase(this)
                 mediJsDb.transferMedicinesJsonDBintoRoom(db.medicineDao())
             }
-
-//            if (sideEffectsDB.getNbElements() == 0) {
-//                val mediJsDb = MedicineJsonDatabase(this)
-//                mediJsDb.transferSideEffectsJsonDBintoRoom(db.sideEffectsDao())
-//            }
 
             // call the api to check if the local version is up to date
             this.updateDataService.needToUpdate(
