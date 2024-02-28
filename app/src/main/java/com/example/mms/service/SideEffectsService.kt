@@ -1,7 +1,6 @@
 package com.example.mms.service
 
 import android.content.Context
-import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.database.jsonMedicines.JsonDatabase
 import com.example.mms.model.SideEffects
 
