@@ -10,7 +10,6 @@ import com.example.mms.dao.HourWeightDAO
 import com.example.mms.dao.MedicineDAO
 import com.example.mms.dao.MedicineStorageDAO
 import com.example.mms.dao.OneTakeDAO
-import com.example.mms.dao.SideEffectsDAO
 import com.example.mms.dao.SpecificDaysDAO
 import com.example.mms.dao.TakesDAO
 import com.example.mms.dao.TaskDAO
@@ -28,7 +27,6 @@ import com.example.mms.model.Takes
 import com.example.mms.model.Task
 import com.example.mms.model.User
 import com.example.mms.model.MedicineStorage
-import com.example.mms.model.SideEffects
 import com.example.mms.model.Version
 import com.example.mms.model.medicines.Medicine
 
@@ -37,8 +35,7 @@ import com.example.mms.model.medicines.Medicine
     User::class, Medicine::class, Task::class, Cycle::class,
     CycleHourWeight::class, HourWeight::class,
     SpecificDaysHourWeight::class, Takes::class, OneTake::class,
-    MedicineStorage::class, Version::class, DairyNote::class, Doctor::class,
-    SideEffects::class
+    MedicineStorage::class, Version::class, DairyNote::class, Doctor::class
 ], version = 8)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -54,5 +51,4 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun versionDao(): VersionDAO
     abstract fun dairyDao(): DairyDAO
     abstract fun doctorDao(): DoctorDAO
-    abstract fun sideEffectsDao(): SideEffectsDAO
 }

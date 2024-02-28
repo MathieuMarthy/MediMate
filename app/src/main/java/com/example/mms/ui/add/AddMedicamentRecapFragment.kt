@@ -19,6 +19,7 @@ import com.example.mms.Utils.getFormattedDate
 import com.example.mms.Utils.goToInAddFragments
 import com.example.mms.adapter.InteractionsAdapter
 import com.example.mms.adapter.RecapSpecificDaysAdapter
+import com.example.mms.adapter.SideEffectsAdapter
 import com.example.mms.dao.InteractionDao
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
@@ -28,6 +29,7 @@ import com.example.mms.model.Interaction
 import com.example.mms.model.Task
 import com.example.mms.model.medicines.Medicine
 import com.example.mms.service.NotifService
+import com.example.mms.service.SideEffectsService
 import com.example.mms.service.TasksService
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -37,6 +39,7 @@ class AddMedicamentRecapFragment : Fragment() {
     private var _binding: FragmentAddRecapBinding? = null
     private val binding get() = _binding!!
     private lateinit var tasksService: TasksService
+    private lateinit var sideEffectsService: SideEffectsService
     private lateinit var viewModel: SharedAMViewModel
 
     private lateinit var saveFunction: (Task) -> Unit
@@ -88,6 +91,22 @@ class AddMedicamentRecapFragment : Fragment() {
             binding.imageDanger.visibility = View.VISIBLE
         }
 
+        this.sideEffectsService = SideEffectsService(requireContext())
+        val sideEffects = this.sideEffectsService.getSideEffectsByMedicineId(medicine.code_cis)
+
+
+        if (sideEffects != null && sideEffects.isNotEmpty()) {
+            binding.btnEffetsSecondaires.visibility = View.VISIBLE
+
+            if (!sideEffects.pregnancy.isNullOrEmpty()) {
+                binding.imageVoiture.visibility = View.VISIBLE
+            }
+            if (!sideEffects.drive.isNullOrEmpty()) {
+                binding.imageVoiture.visibility = View.VISIBLE
+            }
+        }
+
+
         if (cycle != null) {
             // Cycle
             saveFunction = { addedTask ->
@@ -128,6 +147,10 @@ class AddMedicamentRecapFragment : Fragment() {
 
             binding.intervalTask.text = task.type
             binding.hourTask.text = ""
+        }
+
+        binding.btnEffetsSecondaires.setOnClickListener {
+            this.openSideEffectsDialog()
         }
 
         binding.btnEffetsSecondaires.setOnClickListener {
@@ -260,14 +283,39 @@ class AddMedicamentRecapFragment : Fragment() {
     private fun openInteractionsDialog() {
         val interactionsAdapters = InteractionsAdapter(interactions)
 
-        val dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.custom_dialog_interaction)
+        this.openDialog(
+            interactionsAdapters,
+            R.id.rv_interactions,
+            R.layout.custom_dialog_interaction,
+            R.id.btn_close_interactions
+        )
+    }
 
-        val recyclerView = dialog.findViewById<RecyclerView>(R.id.rv_interactions)
-        recyclerView.adapter = interactionsAdapters
+    private fun openSideEffectsDialog() {
+        val sideEffectsAdapters = SideEffectsAdapter(interactions)
+
+        this.openDialog(
+            sideEffectsAdapters,
+            R.id.rv_side_effects,
+            R.layout.custom_dialog_side_effects,
+            R.id.btn_close_side_effects
+        )
+    }
+
+    private fun openDialog(
+        adapter: RecyclerView.Adapter<*>,
+        recyclerViewId: Int,
+        layout: Int,
+        closeButtonId: Int
+    ) {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(layout)
+
+        val recyclerView = dialog.findViewById<RecyclerView>(recyclerViewId)
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
 
-        val btnClose = dialog.findViewById<View>(R.id.btn_close_interactions)
+        val btnClose = dialog.findViewById<View>(closeButtonId)
         btnClose.setOnClickListener {
             dialog.dismiss()
         }

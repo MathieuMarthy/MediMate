@@ -12,8 +12,8 @@ class SideEffectsService(context: Context) {
         return this.jsonDatabase.getSideEffects()
     }
 
-    fun getSideEffectsByMedicineId(medicineId: String): SideEffects? {
-        val medicineSideEffects = this.getSideEffects()[medicineId] ?: mapOf()
+    fun getSideEffectsByMedicineId(medicineId: Long): SideEffects? {
+        val medicineSideEffects = this.getSideEffects()[medicineId.toString()] ?: mapOf()
 
         return if (medicineSideEffects.isEmpty()) {
             null
