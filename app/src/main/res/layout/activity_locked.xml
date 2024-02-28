@@ -186,7 +186,6 @@
             style="@style/CustomButtonStyle3"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:onClick="onDeleteButtonClick"
             android:src="@drawable/baseline_backspace_24" />
 
     </androidx.gridlayout.widget.GridLayout>
