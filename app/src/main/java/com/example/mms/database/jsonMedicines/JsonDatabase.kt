@@ -2,10 +2,8 @@ package com.example.mms.database.jsonMedicines
 
 import android.content.Context
 import com.example.mms.dao.MedicineDAO
-import com.example.mms.dao.SideEffectsDAO
 import com.example.mms.model.SideEffects
 import com.example.mms.model.medicines.Medicine
-import com.google.gson.Gson
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
@@ -15,7 +13,7 @@ import kotlinx.serialization.json.Json
  * @property context The context of the application
  * @property dbMedicineFileName The name of the json file
  */
-class MedicineJsonDatabase(
+class JsonDatabase(
     val context: Context
 ) {
     private val dbMedicineFileName = "databases/medicines_flat.json"
