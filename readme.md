@@ -6,8 +6,12 @@
 This application was created as part of a 3rd year Computer Science project at the IUT in Nantes.  
 Application that helps you store the different medication you have to take, allowing to scan prescription, manage your medications frequencies and stock, and sends you notifications.
 
-
-
+After the first version of the application, maintenance has been put in place.
+The maintenance objective was to implemente new fonctionnality :
+- Use RPPS code to have doctor contact details
+- View all drug information
+- Avoid redundancy of active ingredients
+- Risk monitoring (contraindication, driving, pregnancy, ...)
 
 ## Authors
 
@@ -15,6 +19,12 @@ Application that helps you store the different medication you have to take, allo
 - [@Mathieu Marthy](https://www.github.com/MathieuMarthy)
 - [@Sylvain Baudouin](https://www.github.com/syysy)
 
+## Maintainer
+
+- [@Mathieu Marthy](https://www.github.com/MathieuMarthy)
+- [@Paul Boutet](https://www.github.com/Kartinlage)
+- [@Mathis Caprin](https://www.github.com/mathiscaprin)
+- [@Erwan Piaut](https://www.github.com/ErwanPaiut)
 
 ## Api repository
 
