@@ -276,25 +276,31 @@ class AddMedicamentRecapFragment : Fragment() {
     }
 
     private fun checkIfUserAlreadyTakeThisSubstance() {
-        var userAlreadyTakeSameSubstance = false
+        var medicinesWithSameSubstance = listOf<Medicine>()
 
         val thread = Thread {
-            userAlreadyTakeSameSubstance = this.tasksService.ifUserAlreadyTakeThisSubstance(medicine)
+            medicinesWithSameSubstance = this.tasksService.ifUserAlreadyTakeThisSubstance(medicine)
         }
         thread.start()
         thread.join()
 
-        if (userAlreadyTakeSameSubstance) {
+        if (medicinesWithSameSubstance.isNotEmpty()) {
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle(getString(R.string.attention))
-            builder.setMessage(getString(R.string.meme_substance_ajouter_quand_meme, medicine.name))
+            builder.setMessage(
+                getString(
+                    R.string.meme_substance_ajouter_quand_meme,
+                    medicinesWithSameSubstance.first().name,
+                    medicine.name,
+                    medicine.name
+                )
+            )
 
             builder.setPositiveButton(getString(R.string.oui)) { _, _ ->
                 saveAndRedirect()
             }
 
-            builder.setNegativeButton(getString(R.string.non)) { _, _ ->
-            }
+            builder.setNegativeButton(getString(R.string.non)) { _, _ -> }
 
             builder.show()
         } else {

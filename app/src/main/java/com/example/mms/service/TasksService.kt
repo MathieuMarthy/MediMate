@@ -789,17 +789,18 @@ class TasksService(context: Context) {
         return medicines
     }
 
-    fun ifUserAlreadyTakeThisSubstance(newMedicine: Medicine): Boolean {
+    fun ifUserAlreadyTakeThisSubstance(newMedicine: Medicine): List<Medicine> {
         val medicines = this.getCurrentUserMedicines()
+        val medicinesWithSameSubstance = mutableListOf<Medicine>()
 
         for (medicine in medicines) {
             if (medicine.name == newMedicine.name ||
                 (medicine.composition != null &&
                         medicine.composition!!.substance_code == newMedicine.composition!!.substance_code)) {
-                return true
+                medicinesWithSameSubstance.add(medicine)
             }
         }
 
-        return false
+        return medicinesWithSameSubstance
     }
 }
