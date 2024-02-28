@@ -1,14 +1,9 @@
 package com.example.mms.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 
-@Entity(
-    tableName = "side_effects"
-)
+@Serializable
 class SideEffects (
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
     val fullInfoUrl: String,
     val posology: String?,
     val contraindications: String?,

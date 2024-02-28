@@ -41,8 +41,8 @@ class JsonDatabase(
     /**
      * Returns the side effects from the json database
      */
-    private fun getSideEffects(): List<SideEffects> {
-        return Json.decodeFromString<List<SideEffects>>(this.getJsonContent(this.dbSideEffectsFileName))
+    fun getSideEffects(): Map<String, Map<String, String>> {
+        return Json.decodeFromString<Map<String, Map<String, String>>>(this.getJsonContent(this.dbSideEffectsFileName))
     }
 
     /**
