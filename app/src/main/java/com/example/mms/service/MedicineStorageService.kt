@@ -95,17 +95,17 @@ class MedicineStorageService(val context: Context, val view: View) {
                 )
 
                 // Add a button to dismiss the snackbar
-                snackbar.setAction("X", {
+                snackbar.setAction("X") {
                     snackbar.dismiss()
-                })
+                }
 
                 // Add a button to update the storage
                 snackbar.setAction(
-                    this.context.getString(R.string.gerer_stock),
-                    {
-                        dialogGererStock(medicineStorage, medicineName, takesAdapter)
-                        snackbar.dismiss()
-                    })
+                    this.context.getString(R.string.gerer_stock)
+                ) {
+                    dialogGererStock(medicineStorage, medicineName, takesAdapter)
+                    snackbar.dismiss()
+                }
 
                 // Change the color of the snackbar
                 snackbar.setBackgroundTint(context.getColor(R.color.white))
