@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mms.R
 import com.example.mms.model.ShowableTakes
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.Locale
 
 /**
@@ -18,10 +17,10 @@ import java.util.Locale
  * @param context the context of the activity
  * @param items the list of tasks
  */
-class TakesHistoryAdapter (
+class TakesHistoryAdapter(
     private val context: Context,
     private val items: MutableList<ShowableTakes>
-): RecyclerView.Adapter<TakesHistoryAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<TakesHistoryAdapter.MyViewHolder>() {
 
     /**
      * Class that represents the view holder of the recycler view
@@ -60,7 +59,11 @@ class TakesHistoryAdapter (
         val item = this.items[position]
 
         holder.medicineName.text = item.medicineName
-        holder.medicineDoseForme.text = this.context.getString(R.string.doses_weight_type, item.weight.toString(), item.medicineType)
+        holder.medicineDoseForme.text = this.context.getString(
+            R.string.doses_weight_type,
+            item.weight.toString(),
+            item.medicineType
+        )
 
         val hourFormatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.getDefault())
         val hourString = item.takeAt.format(hourFormatter)

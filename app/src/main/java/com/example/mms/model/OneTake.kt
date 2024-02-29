@@ -21,7 +21,7 @@ import androidx.room.ForeignKey
         )
     ]
 )
-class OneTake (
+class OneTake(
     val taskId: Long,
     val hourWeightId: Int,
 )

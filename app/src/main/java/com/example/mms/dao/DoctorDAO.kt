@@ -4,10 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.mms.model.Cycle
-import com.example.mms.model.CycleHourWeight
 import com.example.mms.model.Doctor
-import com.example.mms.model.Version
 
 @Dao
 interface DoctorDAO {

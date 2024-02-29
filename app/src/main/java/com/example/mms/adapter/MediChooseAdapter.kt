@@ -1,7 +1,6 @@
 package com.example.mms.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +24,9 @@ import java.time.Period
  */
 class MediChooseAdapter(
     private val context: Context,
-    private val db : AppDatabase,
+    private val db: AppDatabase,
     private val listMedicament: List<OCR.MedicationInfo>,
-    private val listTaskId: HashMap<Int,Long>
+    private val listTaskId: HashMap<Int, Long>
 
 ) : RecyclerView.Adapter<MediChooseAdapter.ViewHolder>() {
 
@@ -51,7 +50,8 @@ class MediChooseAdapter(
 
     // function that creates the view holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_choose_medicament, parent, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.item_choose_medicament, parent, false)
         return ViewHolder(view)
     }
 
@@ -66,11 +66,15 @@ class MediChooseAdapter(
         if (taskId != -1L) {
             val tt = Thread {
                 val task = this.db.taskDao().getTask(taskId)
-                val taskFilled =  this.taskService.getTaskFilled(task)
+                val taskFilled = this.taskService.getTaskFilled(task)
                 if (taskFilled != null) {
                     holder.medicamentFrequency.text = taskFilled.type
-                    val nbDays = (Period.between(taskFilled.startDate.toLocalDate(), taskFilled.endDate.toLocalDate()).days+1).toString()
-                    holder.medicamentDuration.text = this.context.getString(R.string.nombre_jours, nbDays)
+                    val nbDays = (Period.between(
+                        taskFilled.startDate.toLocalDate(),
+                        taskFilled.endDate.toLocalDate()
+                    ).days + 1).toString()
+                    holder.medicamentDuration.text =
+                        this.context.getString(R.string.nombre_jours, nbDays)
                 }
             }
             tt.start()

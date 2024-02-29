@@ -2,13 +2,8 @@ package com.example.mms.ui.add
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mms.database.inApp.AppDatabase
-import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.ActivityAddNoteBinding
-import com.example.mms.model.DairyNote
-import com.example.mms.service.DairyService
 
 class AddNote : AppCompatActivity() {
 
@@ -37,8 +32,8 @@ class AddNote : AppCompatActivity() {
             val saisi = binding.textNote.text.toString()
 
             val valeurRetour = Intent()
-                                .putExtra(CLE, saisi)
-                                .putExtra("id", id)
+                .putExtra(CLE, saisi)
+                .putExtra("id", id)
             setResult(RESULT_OK, valeurRetour)
             finish()
         }

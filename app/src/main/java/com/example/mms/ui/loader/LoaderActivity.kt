@@ -13,11 +13,11 @@ import android.widget.FrameLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mms.R
+import com.example.mms.broadcast.MidnightAlarmReceiver
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.database.jsonMedicines.JsonDatabase
 import com.example.mms.databinding.LoaderBinding
-import com.example.mms.broadcast.MidnightAlarmReceiver
 import com.example.mms.model.User
 import com.example.mms.service.NotifService
 import com.example.mms.service.TasksService
@@ -85,7 +85,8 @@ class LoaderActivity : AppCompatActivity() {
                         // Download the medicines
                         fun downloadNext() {
                             this.updateDataService.nextDownload({
-                                progress = ((this.updateDataService.nbMedicinesToDownload.toDouble() * 100) / numElements.toDouble()).toInt()
+                                progress =
+                                    ((this.updateDataService.nbMedicinesToDownload.toDouble() * 100) / numElements.toDouble()).toInt()
 
                                 runOnUiThread {
                                     binding.downloadProgressBar.progress = progress
@@ -166,11 +167,19 @@ class LoaderActivity : AppCompatActivity() {
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
             set(Calendar.MILLISECOND, 0)
-            add(Calendar.DAY_OF_YEAR, 1) // Add one day to be sure that the alarm will be triggered tomorrow
+            add(
+                Calendar.DAY_OF_YEAR,
+                1
+            ) // Add one day to be sure that the alarm will be triggered tomorrow
         }
 
         val intent = Intent(this, MidnightAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
 
 
         // Set the alarm at midnight and repeat it every day
@@ -190,7 +199,8 @@ class LoaderActivity : AppCompatActivity() {
         // Get the hour weights for all users
         val tasksService = TasksService(this)
         var todaysShowableHourWeights = tasksService.getTodaysHourWeightsForAllUsers()
-        todaysShowableHourWeights = tasksService.removeAlreadyPassedHourWeights(todaysShowableHourWeights)
+        todaysShowableHourWeights =
+            tasksService.removeAlreadyPassedHourWeights(todaysShowableHourWeights)
 
         // Planify the notifications
         val notifService = NotifService(this)
@@ -199,7 +209,12 @@ class LoaderActivity : AppCompatActivity() {
 
     private fun isMidnightAlarmSet(): Boolean {
         val intent = Intent(this, MidnightAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_MUTABLE)
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_MUTABLE
+        )
         return pendingIntent != null
     }
 }

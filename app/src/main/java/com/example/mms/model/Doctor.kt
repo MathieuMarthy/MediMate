@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
     tableName = "doctor",
     primaryKeys = ["rpps"]
 )
-class Doctor (
+class Doctor(
     val rpps: String,
 
     val firstName: String,

@@ -23,7 +23,7 @@ import androidx.room.Ignore
         )
     ]
 )
-class SpecificDaysHourWeight (
+class SpecificDaysHourWeight(
     var taskId: Long,
     var hourWeightId: Int,
     var day: Int,

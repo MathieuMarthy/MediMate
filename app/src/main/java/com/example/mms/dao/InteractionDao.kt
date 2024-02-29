@@ -8,12 +8,16 @@ import com.example.mms.model.medicines.Medicine
 class InteractionDao(context: Context) {
     private val interactions = JsonDatabase(context).getInteractions()
 
-    fun thisMedicineInteractsWith(medicine: Medicine, othersMedicines: List<Medicine>): List<Interaction> {
+    fun thisMedicineInteractsWith(
+        medicine: Medicine,
+        othersMedicines: List<Medicine>
+    ): List<Interaction> {
 
         var medicineInteractions: Map<String, Map<String, String>>? = null
         for (key in this.interactions.keys) {
             if (medicine.name.contains(key, ignoreCase = true) ||
-                (medicine.composition?.substance_name ?: "").contains(key, ignoreCase = true)) {
+                (medicine.composition?.substance_name ?: "").contains(key, ignoreCase = true)
+            ) {
                 medicineInteractions = this.interactions[key]
                 break
             }
@@ -32,7 +36,7 @@ class InteractionDao(context: Context) {
             }
         }
 
-        return medicineInteractions.map { it ->
+        return medicineInteractions.map {
             Interaction(
                 it.key,
                 it.value["type"] ?: "",

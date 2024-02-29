@@ -3,14 +3,12 @@ package com.example.mms.ui.welcome
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.databinding.WelcomeActivityBinding
 import com.example.mms.ui.createAccount.CreateAccountActivity
 
 class WelcomeActivity : AppCompatActivity() {
 
     private lateinit var binding: WelcomeActivityBinding
-    private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

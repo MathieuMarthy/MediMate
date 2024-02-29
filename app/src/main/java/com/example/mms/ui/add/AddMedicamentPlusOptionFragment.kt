@@ -30,7 +30,7 @@ class AddMedicamentPlusOptionFragment : Fragment() {
 
         binding.nextButton.setOnClickListener {
             val nextLayoutId = this.getLayoutWithCheckedRadio()
-            goToInAddFragments(requireActivity(),nextLayoutId)
+            goToInAddFragments(requireActivity(), nextLayoutId)
         }
 
         return root

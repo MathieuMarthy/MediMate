@@ -1,19 +1,17 @@
 package com.example.mms.dao
 
 import android.content.Context
-import android.database.sqlite.SQLiteConstraintException
 import androidx.test.core.app.ApplicationProvider
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.model.User
-import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class UserDAOTest {
     private lateinit var db: AppDatabase
     private lateinit var userDAO: UserDAO
 
-    fun setUp() {
+    private fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = SingletonDatabase.getDatabase(context)
         userDAO = db.userDao()
@@ -65,7 +63,7 @@ class UserDAOTest {
     }
 
 
-    fun getUser1(): User {
+    private fun getUser1(): User {
         return User(
             "Doe",
             "John",
@@ -83,7 +81,7 @@ class UserDAOTest {
         )
     }
 
-    fun getUser2(): User {
+    private fun getUser2(): User {
         return User(
             "Doe",
             "Jane",

@@ -1,7 +1,6 @@
 package com.example.mms.dao
 
 import android.content.Context
-import android.database.sqlite.SQLiteConstraintException
 import androidx.room.Query
 import androidx.test.core.app.ApplicationProvider
 import com.example.mms.database.inApp.AppDatabase
@@ -14,7 +13,7 @@ class MedicineStorageDAOTest {
     private lateinit var db: AppDatabase
     private lateinit var medicineStorageDAO: MedicineStorageDAO
 
-    fun setUp() {
+    private fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = SingletonDatabase.getDatabase(context)
         medicineStorageDAO = db.medicineStorageDao()
@@ -51,4 +50,5 @@ class MedicineStorageDAOTest {
 }
 
 @Query("DELETE FROM MedicineStorage WHERE medicineId = :code_cis")
-private fun MedicineStorageDAO.delete(code_cis: Long){}
+private fun MedicineStorageDAO.delete(code_cis: Long) {
+}

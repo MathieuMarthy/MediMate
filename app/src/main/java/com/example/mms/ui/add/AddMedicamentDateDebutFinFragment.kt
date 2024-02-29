@@ -86,7 +86,12 @@ class AddMedicamentDateDebutFinFragment : Fragment() {
      * @param start true if the EditText is for the start date, false if it's for the end date
      * @param editText2 the other EditText
      */
-    fun setupDatePickerDialog(editText: EditText, initialDate: LocalDateTime, start : Boolean, editText2: EditText)  {
+    private fun setupDatePickerDialog(
+        editText: EditText,
+        initialDate: LocalDateTime,
+        start: Boolean,
+        editText2: EditText
+    ) {
         // init date
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -100,13 +105,12 @@ class AddMedicamentDateDebutFinFragment : Fragment() {
                 val selectedDateString = dateToString(selectedDay, selectedMonth + 1, selectedYear)
                 val selected = LocalDateTime.of(selectedYear, selectedMonth + 1, selectedDay, 0, 0)
                 editText.setText(selectedDateString)
-                if (start){
+                if (start) {
                     beginDate = selected
                     if (endDate.isBefore(beginDate)) {
                         editText2.setText(selectedDateString)
                     }
-                }
-                else endDate = selected
+                } else endDate = selected
             },
             year,
             month,
@@ -115,19 +119,27 @@ class AddMedicamentDateDebutFinFragment : Fragment() {
 
         // if the date is for the end date, set the min date to the begin date
         if (!start) {
-            datePickerDialog.datePicker.minDate = beginDate.toLocalDate().toEpochDay() * 24 * 60 * 60 * 1000
+            datePickerDialog.datePicker.minDate =
+                beginDate.toLocalDate().toEpochDay() * 24 * 60 * 60 * 1000
         }
 
         // when the user click on the EditText, show the date picker dialog
         editText.setOnClickListener {
             if (!start) {
-                datePickerDialog.datePicker.minDate = beginDate.toLocalDate().toEpochDay() * 24 * 60 * 60 * 1000
+                datePickerDialog.datePicker.minDate =
+                    beginDate.toLocalDate().toEpochDay() * 24 * 60 * 60 * 1000
             }
             datePickerDialog.show()
         }
 
         // Afficher la date initiale dans l'EditText
-        editText.setText(dateToString(initialDate.dayOfMonth, initialDate.monthValue, initialDate.year))
+        editText.setText(
+            dateToString(
+                initialDate.dayOfMonth,
+                initialDate.monthValue,
+                initialDate.year
+            )
+        )
 
         editText.isEnabled = true
         editText.keyListener = null

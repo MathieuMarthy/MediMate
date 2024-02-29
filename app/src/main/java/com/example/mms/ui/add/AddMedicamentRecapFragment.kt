@@ -82,7 +82,10 @@ class AddMedicamentRecapFragment : Fragment() {
         val interactionDao = InteractionDao(requireContext())
 
         val thread = Thread {
-            this.interactions = interactionDao.thisMedicineInteractsWith(medicine, this.tasksService.getCurrentUserMedicines())
+            this.interactions = interactionDao.thisMedicineInteractsWith(
+                medicine,
+                this.tasksService.getCurrentUserMedicines()
+            )
         }
         thread.start()
         thread.join()
@@ -125,7 +128,7 @@ class AddMedicamentRecapFragment : Fragment() {
             binding.intervalTask.text = task.type
             binding.dateNextTask.text = getFormattedDate(tasksService.getNextTakeDate(task))
 
-        } else if (specificDays != null && specificDays.isNotEmpty()) {
+        } else if (!specificDays.isNullOrEmpty()) {
             // SpecificDays
             saveFunction = { addedTask ->
                 saveSpecificDays(addedTask)
@@ -243,8 +246,10 @@ class AddMedicamentRecapFragment : Fragment() {
                     // planify notification
                     val now = LocalDateTime.now()
                     val taskWithHW = this.tasksService.getByIdAt(addedTask.id, now)
-                    var todaysSwHourWeightsTask = this.tasksService.createOrGetOneTodaysSwHourWeight(taskWithHW)
-                    todaysSwHourWeightsTask = this.tasksService.removeAlreadyPassedHourWeights(todaysSwHourWeightsTask)
+                    var todaysSwHourWeightsTask =
+                        this.tasksService.createOrGetOneTodaysSwHourWeight(taskWithHW)
+                    todaysSwHourWeightsTask =
+                        this.tasksService.removeAlreadyPassedHourWeights(todaysSwHourWeightsTask)
 
                     if (todaysSwHourWeightsTask.isNotEmpty()) {
                         val notifService = NotifService(this.requireContext())
@@ -257,8 +262,8 @@ class AddMedicamentRecapFragment : Fragment() {
         }
 
         // if the user come from OCR, we redirect him to the main activity
-        if (viewModel.fromOCR.value!!){
-            val intent = Intent().putExtra("taskId", idLastInserted )
+        if (viewModel.fromOCR.value!!) {
+            val intent = Intent().putExtra("taskId", idLastInserted)
             requireActivity().setResult(RESULT_OK, intent)
             requireActivity().finish()
         } else {

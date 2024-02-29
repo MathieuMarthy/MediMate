@@ -2,7 +2,6 @@ package com.example.mms.adapter
 
 import android.app.Dialog
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.example.mms.model.HourWeight
 import com.example.mms.model.MedicineStorage
 import com.example.mms.model.Task
 import com.example.mms.model.medicines.Medicine
-import com.example.mms.service.MedicineStorageService
 import com.example.mms.service.TasksService
 
 /**
@@ -27,9 +25,9 @@ import com.example.mms.service.TasksService
  */
 class TaskAdapter(
     private val context: Context,
-    private val items : MutableList<Task>,
-    private val db : AppDatabase
-    )  : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
+    private val items: MutableList<Task>,
+    private val db: AppDatabase
+) : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
 
     private val taskService = TasksService(context)
 
@@ -37,12 +35,13 @@ class TaskAdapter(
      * Class that represents the view holder of the recycler view
      * @param itemView the view
      */
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-            val medicineName : TextView = itemView.findViewById(R.id.medicine_title)
-            val medicineInformation : TextView = itemView.findViewById(R.id.medicine_information)
-            val medicineFrequency : TextView = itemView.findViewById(R.id.medicine_my_medicines_frequency)
-            val modifyTask : Button = itemView.findViewById(R.id.my_medicines_button_modify)
-            val detailsTask : Button = itemView.findViewById(R.id.my_medicines_button_details)
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val medicineName: TextView = itemView.findViewById(R.id.medicine_title)
+        val medicineInformation: TextView = itemView.findViewById(R.id.medicine_information)
+        val medicineFrequency: TextView =
+            itemView.findViewById(R.id.medicine_my_medicines_frequency)
+        val modifyTask: Button = itemView.findViewById(R.id.my_medicines_button_modify)
+        val detailsTask: Button = itemView.findViewById(R.id.my_medicines_button_details)
     }
 
     /**
@@ -51,7 +50,8 @@ class TaskAdapter(
      * @param viewType the view type
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_medicine_my_medicines, parent, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.item_medicine_my_medicines, parent, false)
         return MyViewHolder(view)
     }
 
@@ -69,7 +69,7 @@ class TaskAdapter(
      */
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = this.items[position]
-        var medicine : Medicine? = null
+        var medicine: Medicine? = null
         // Get the medicine from the database in a Thread
         val t = Thread {
             medicine = db.medicineDao().getByCIS(item.medicineCIS)
@@ -96,7 +96,7 @@ class TaskAdapter(
      * @param medicine the medicine
      * @param edit if the task is editable
      */
-    fun dialogTask(task : Task, medicine: Medicine , edit : Boolean) {
+    private fun dialogTask(task: Task, medicine: Medicine, edit: Boolean) {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.custom_dialog_tasks)
 
@@ -115,16 +115,17 @@ class TaskAdapter(
         val stock = dialog.findViewById<TextView>(R.id.stock_value)
 
         // Get the stock or null for a medicine from the database in a Thread
-        var medicineStorage : MedicineStorage? = null
+        var medicineStorage: MedicineStorage? = null
         val thread = Thread {
-            medicineStorage = db.medicineStorageDao().getMedicineStorageByMedicineId(medicine.code_cis)
+            medicineStorage =
+                db.medicineStorageDao().getMedicineStorageByMedicineId(medicine.code_cis)
         }
         thread.start()
         thread.join()
         if (medicineStorage != null) {
             tvStock.visibility = View.VISIBLE
             stock.text = medicineStorage!!.storage.toString()
-        }else{
+        } else {
             tvStock.visibility = View.GONE
             stock.visibility = View.GONE
         }

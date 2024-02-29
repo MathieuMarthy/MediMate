@@ -14,14 +14,14 @@ class HourWeightDAOTest {
     private lateinit var db: AppDatabase
     private lateinit var hourWeightDAO: HourWeightDAO
 
-    fun setUp() {
+    private fun setUp() {
         print("Setting up")
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = SingletonDatabase.getDatabase(context)
         hourWeightDAO = db.hourWeightDao()
     }
 
-    fun cleanUp() {
+    private fun cleanUp() {
         print("Cleaning up")
         while (hourWeightDAO.getLastInserted() != null) {
             hourWeightDAO.delete(hourWeightDAO.getLastInserted()!!)
@@ -41,7 +41,7 @@ class HourWeightDAOTest {
     }
 
     @Test
-    fun testInsertFail(){
+    fun testInsertFail() {
         setUp()
         val hourWeight = HourWeight(10, "12:00", 70)
         hourWeightDAO.insert(hourWeight)

@@ -21,7 +21,7 @@
         android:id="@+id/navigation_notifications"
         android:name="com.example.mms.ui.main.ConseilsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_conseils" >
+        tools:layout="@layout/fragment_conseils">
         <action
             android:id="@+id/action_navigation_notifications_to_navigation_modify_medecin"
             app:destination="@id/navigation_modify_medecin" />
@@ -44,7 +44,7 @@
         android:id="@+id/navigation_modify_medecin"
         android:name="com.example.mms.ui.doctor.ModifyMedecinFragment"
         android:label="@+id/titre_modify_medecin"
-        tools:layout="@layout/activity_modify_medecin" >
+        tools:layout="@layout/activity_modify_medecin">
         <action
             android:id="@+id/action_navigation_modify_medecin_to_navigation_notifications"
             app:destination="@id/navigation_notifications" />
@@ -57,7 +57,7 @@
         android:id="@+id/navigation_find_doctor"
         android:name="com.example.mms.ui.doctor.FindDoctorFragment"
         android:label="@layout/activity_find_doctor"
-        tools:layout="@layout/activity_find_doctor" >
+        tools:layout="@layout/activity_find_doctor">
         <action
             android:id="@+id/action_navigation_find_doctor_to_navigation_modify_medecin"
             app:destination="@id/navigation_modify_medecin" />

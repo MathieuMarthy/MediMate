@@ -1,11 +1,8 @@
 package com.example.mms.ui.add
 
-import android.graphics.Bitmap
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mms.Utils.OCR
 import com.example.mms.model.Cycle
 import com.example.mms.model.MedicineStorage
 import com.example.mms.model.SpecificDaysHourWeight
@@ -30,11 +27,6 @@ class SharedAMViewModel : ViewModel() {
     private val _previousFragmentId = MutableLiveData(0)
     val previousFragmentId: LiveData<Int> get() = _previousFragmentId
 
-    private val _imageToScan = MutableLiveData<Bitmap>()
-    val imageToScan: LiveData<Bitmap> get() = _imageToScan
-
-    private val _medicationsFound = MutableLiveData<List<OCR.MedicationInfo>>()
-    val medicationsFound: LiveData<List<OCR.MedicationInfo>> get() = _medicationsFound
 
     private val _storage = MutableLiveData<MedicineStorage?>(null)
     val storage: LiveData<MedicineStorage?> get() = _storage

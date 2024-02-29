@@ -2,16 +2,10 @@ package com.example.mms.Utils
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.util.Log
 import androidx.core.text.isDigitsOnly
 import com.example.mms.database.inApp.AppDatabase
-import com.example.mms.database.inApp.SingletonDatabase
-import com.example.mms.ui.add.AddActivity
-import com.example.mms.ui.add.ScanLoading
 import edu.stanford.nlp.simple.Document
-import kotlinx.serialization.Serializable
 import kotlin.math.abs
-import java.util.regex.Pattern
 
 class OCR(private val db: AppDatabase) {
 
@@ -100,7 +94,7 @@ class OCR(private val db: AppDatabase) {
      * @param listDos The dosages, with the index of the first token of the dosage as key.
      * @return The medication names and dosages joined, with the index of the first token of the name as key.
      */
-    private fun joinMedDos(listMed : Map<Int, String>, listDos : Map<Int, String>) : Map<Int, String> {
+    private fun joinMedDos(listMed: Map<Int, String>, listDos: Map<Int, String>): Map<Int, String> {
         val listMedDos = mutableMapOf<Int, String>()
         for (i in listDos.keys) {
             for (j in listMed.keys) {
@@ -112,39 +106,6 @@ class OCR(private val db: AppDatabase) {
         return listMedDos
     }
 
-    /**
-     * Extracts the frequencies from the text. (Not used)
-     *
-     * @param tokens The tokens to extract the frequencies from.
-     * @return The frequencies extracted from the text.
-     */
-    private fun extractFrequency(tokens: List<String>): String {
-        // Exemple : Identifier des phrases comme "une fois par jour", "2 fois par jour", etc.
-        val frequencyPattern = Pattern.compile("\\d+ par jour")
-        for (token in tokens) {
-            if (frequencyPattern.matcher(token).find()) {
-                return token
-            }
-        }
-        return ""
-    }
-
-    /**
-     * Extracts the duration from the text. (Not used)
-     *
-     * @param tokens The tokens to extract the duration from.
-     * @return The duration extracted from the text.
-     */
-    private fun extractDuration(tokens: List<String>): String {
-        // Exemple : Identifier des phrases comme "pendant 10 jours", "pendant 2 semaines", etc.
-        val durationPattern = Pattern.compile("pendant \\d+ (jours|semaines|mois)")
-        for (token in tokens) {
-            if (durationPattern.matcher(token).find()) {
-                return token
-            }
-        }
-        return ""
-    }
 
     /**
      * Transforms the text to make it easier to extract the medication information.
@@ -153,7 +114,7 @@ class OCR(private val db: AppDatabase) {
      * @param text The text to transform.
      * @return The transformed text.
      */
-    private fun transformText(text: String) : String {
+    private fun transformText(text: String): String {
         val text2 = text.replace('o', '0')
         var res = ""
         for (i in text2.indices) {
@@ -166,6 +127,7 @@ class OCR(private val db: AppDatabase) {
                             '0'
                         }
                     }
+
                     text2.length - 1 -> {
                         res += if (text2[i - 1] in 'a'..'z') {
                             'o'
@@ -173,10 +135,12 @@ class OCR(private val db: AppDatabase) {
                             '0'
                         }
                     }
+
                     else -> {
                         res += if ((text2[i - 1] in 'a'..'z' && text2[i + 1] in 'a'..'z') ||
                             (text2[i - 1] in 'a'..'z' && text2[i + 1] == ' ') ||
-                            (text2[i - 1] == ' ' && text2[i + 1] in 'a'..'z')) {
+                            (text2[i - 1] == ' ' && text2[i + 1] in 'a'..'z')
+                        ) {
                             'o'
                         } else {
                             '0'
@@ -197,7 +161,7 @@ class OCR(private val db: AppDatabase) {
      * @param text The text to remove the spaces between numbers from.
      * @return The text without spaces between numbers.
      */
-    private fun removeSpaceBetweenNumbers(text: String) : String {
+    private fun removeSpaceBetweenNumbers(text: String): String {
         var res = ""
         for (i in text.indices) {
             if (text[i] == ' ') {
@@ -220,15 +184,21 @@ class OCR(private val db: AppDatabase) {
      * @param rhs The second CharSequence.
      * @return The Levenshtein distance between the two CharSequences.
      */
-    private fun levenshteinDistance(lhs : CharSequence, rhs : CharSequence) : Int {
-        if (lhs == rhs) { return 0 }
-        if (lhs.isEmpty()) { return rhs.length }
-        if (rhs.isEmpty()) { return lhs.length }
+    private fun levenshteinDistance(lhs: CharSequence, rhs: CharSequence): Int {
+        if (lhs == rhs) {
+            return 0
+        }
+        if (lhs.isEmpty()) {
+            return rhs.length
+        }
+        if (rhs.isEmpty()) {
+            return lhs.length
+        }
 
         val len0 = lhs.length + 1
         val len1 = rhs.length + 1
 
-        if (abs(len0 - len1) > 3){
+        if (abs(len0 - len1) > 3) {
             return 1000
         }
 
@@ -239,7 +209,7 @@ class OCR(private val db: AppDatabase) {
             newCost[0] = i
 
             for (j in 1 until len0) {
-                val match = if(lhs[j - 1] == rhs[i - 1]) 0 else 1
+                val match = if (lhs[j - 1] == rhs[i - 1]) 0 else 1
 
                 val costReplace = cost[j - 1] + match
                 val costInsert = cost[j] + 1

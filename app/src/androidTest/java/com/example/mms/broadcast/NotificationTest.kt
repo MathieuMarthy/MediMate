@@ -14,7 +14,7 @@ import com.example.mms.service.NotifService
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Before
-import org.junit.Test;
+import org.junit.Test
 import java.time.LocalDateTime
 
 class NotificationTest {
@@ -100,7 +100,8 @@ class NotificationTest {
         every { localDateTimeMock.hour } returns 18
         every { localDateTimeMock.minute } returns 20
 
-        val notificationIsPlanned = notifService.planifyOneNotification(showableHourWeight, localDateTimeMock)
+        val notificationIsPlanned =
+            notifService.planifyOneNotification(showableHourWeight, localDateTimeMock)
         assert(!notificationIsPlanned)
     }
 

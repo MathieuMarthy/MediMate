@@ -10,13 +10,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mms.adapter.Interface.CalendarAdapterInterface
-import com.example.mms.adapter.Interface.OnItemClickListener
 import com.example.mms.R
 import com.example.mms.Utils.dateToLocalDatetime
 import com.example.mms.Utils.extractMonthAndYearFromDate
 import com.example.mms.Utils.stringToDate
-import com.example.mms.constant.EngToFr
+import com.example.mms.adapter.Interface.CalendarAdapterInterface
+import com.example.mms.adapter.Interface.OnItemClickListener
 import com.example.mms.model.CalendarDay
 import java.time.format.TextStyle
 import java.util.Locale
@@ -38,6 +37,7 @@ class CalendarAdapter(
 
     // interface for the click listener
     private var itemClickListener: OnItemClickListener? = null
+
     // interface for the calendar adapter
     private var calendarAdapterInterface: CalendarAdapterInterface? = null
 
@@ -117,7 +117,7 @@ class CalendarAdapter(
 
 
     // function that creates the linear layout with the points
-    fun createLinearLayoutWithImage(nb: Int): LinearLayout {
+    private fun createLinearLayoutWithImage(nb: Int): LinearLayout {
         // max 3 points per day (too big if more)
         var numberOfImage = nb
         if (numberOfImage > 3) {
@@ -159,7 +159,7 @@ class CalendarAdapter(
     }
 
     // function that returns the drawable image for the index
-    fun getDrawableImageForIndex(index: Int): Int {
+    private fun getDrawableImageForIndex(index: Int): Int {
         return when (index) {
             0 -> R.drawable.blue_point
             1 -> R.drawable.purple_point

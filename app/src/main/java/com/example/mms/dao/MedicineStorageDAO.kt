@@ -12,6 +12,7 @@ interface MedicineStorageDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(medicineStorage: MedicineStorage)
+
     @Query("SELECT * FROM medicineStorage WHERE medicineId = :medicineId")
     fun getMedicineStorageByMedicineId(medicineId: Long): MedicineStorage?
 

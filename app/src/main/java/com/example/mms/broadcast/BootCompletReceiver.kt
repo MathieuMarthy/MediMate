@@ -11,7 +11,7 @@ import com.example.mms.service.TasksService
 /**
  *  Receiver triggered when the device is booted.
  */
-class BootCompletReceiver: BroadcastReceiver() {
+class BootCompletReceiver : BroadcastReceiver() {
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onReceive(context: Context?, intent: Intent?) {

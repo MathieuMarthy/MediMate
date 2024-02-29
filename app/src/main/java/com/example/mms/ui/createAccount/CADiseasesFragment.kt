@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import com.example.mms.R
-import com.example.mms.database.inApp.AppDatabase
-import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.constant.listAllergies
 import com.example.mms.constant.listDietPlan
 import com.example.mms.constant.listHealthDiseases
@@ -19,7 +16,6 @@ import com.example.mms.ui.createAccount.Dialog.CustomDialogDiseasses
 class CADiseasesFragment : Fragment() {
 
     private var _binding: FragmentCreateAccountDiseasesBinding? = null
-    private lateinit var db: AppDatabase
 
 
     private val binding get() = _binding!!
@@ -31,13 +27,9 @@ class CADiseasesFragment : Fragment() {
     ): View {
 
         val viewModel = ViewModelProvider(requireActivity())[SharedCAViewModel::class.java]
-        db = SingletonDatabase.getDatabase(requireContext())
         _binding = FragmentCreateAccountDiseasesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val navHostFragment =
-            requireActivity().supportFragmentManager.findFragmentById(com.example.mms.R.id.nav_create_account) as NavHostFragment
-        val navController = navHostFragment.navController
 
         /*
         binding.backButton.buttonArrowBack.setOnClickListener {
@@ -63,7 +55,10 @@ class CADiseasesFragment : Fragment() {
                         }
                     }
                     viewModel.setUserData(currentUser)
-                    binding.editSoucis.setText(getString(R.string.elements_selectionnes, it.size.toString()))
+                    binding.editSoucis.text = getString(
+                        R.string.elements_selectionnes,
+                        it.size.toString()
+                    )
                 }
             dialog.show()
 
@@ -86,7 +81,10 @@ class CADiseasesFragment : Fragment() {
                     }
                 }
                 viewModel.setUserData(currentUser)
-                binding.editAllergies.setText(getString(R.string.elements_selectionnes, it.size.toString()))
+                binding.editAllergies.text = getString(
+                    R.string.elements_selectionnes,
+                    it.size.toString()
+                )
             }
             dialog.show()
 
@@ -109,7 +107,10 @@ class CADiseasesFragment : Fragment() {
                     }
                 }
                 viewModel.setUserData(currentUser)
-                binding.editRegime.setText(getString(R.string.elements_selectionnes, it.size.toString()))
+                binding.editRegime.text = getString(
+                    R.string.elements_selectionnes,
+                    it.size.toString()
+                )
             }
             dialog.show()
 

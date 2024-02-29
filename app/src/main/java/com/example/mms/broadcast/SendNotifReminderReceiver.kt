@@ -3,7 +3,6 @@ package com.example.mms.broadcast
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import com.example.mms.model.Takes
 import com.example.mms.service.NotifService
 import com.example.mms.service.TasksService
@@ -12,7 +11,7 @@ import java.time.LocalDateTime
 /**
  * Broadcast receiver for sending reminder notification.
  */
-class SendNotifReminderReceiver: BroadcastReceiver() {
+class SendNotifReminderReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         // check if context and intent are not null

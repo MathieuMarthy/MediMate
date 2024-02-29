@@ -8,38 +8,20 @@ import java.util.Date
 
 class DateManagmentKtTest {
 
-    private fun nbMonthToString(nbMonth: Int): String {
-        return when (nbMonth) {
-            1 -> "janvier"
-            2 -> "février"
-            3 -> "mars"
-            4 -> "avril"
-            5 -> "mai"
-            6 -> "juin"
-            7 -> "juillet"
-            8 -> "août"
-            9 -> "septembre"
-            10 -> "octobre"
-            11 -> "novembre"
-            12 -> "décembre"
-            else -> ""
-        }
-    }
+    /* @Test
+     fun extractMonthAndYearFromDateTest() {
+         val now = Date()
 
-   /* @Test
-    fun extractMonthAndYearFromDateTest() {
-        val now = Date()
+         val monthYear = extractMonthAndYearFromDate(now.toString())
 
-        val monthYear = extractMonthAndYearFromDate(now.toString())
+         assert(monthYear != null)
 
-        assert(monthYear != null)
+         val month = monthYear!!.first
+         val year = monthYear.second
 
-        val month = monthYear!!.first
-        val year = monthYear.second
-
-        assert(month == this.nbMonthToString(now.month + 1))
-        assert(year == (now.year + 1900).toString())
-    }*/
+         assert(month == this.nbMonthToString(now.month + 1))
+         assert(year == (now.year + 1900).toString())
+     }*/
 
     @Test
     fun extractMonthAndYearFromDateFailTest() {
@@ -69,15 +51,15 @@ class DateManagmentKtTest {
         assert(areDatesOnSameDay(now, in1hour))
     }
 
-/*    @Test
-    fun getFormattedDateTest() {
-        val date = LocalDateTime.of(2020, 1, 1, 0, 0)
-        val stringDate = "mer. 1 janv. 0:00"
+    /*    @Test
+        fun getFormattedDateTest() {
+            val date = LocalDateTime.of(2020, 1, 1, 0, 0)
+            val stringDate = "mer. 1 janv. 0:00"
 
-        val formattedDate = getFormattedDate(date)
+            val formattedDate = getFormattedDate(date)
 
-        assert(formattedDate == stringDate)
-    }*/
+            assert(formattedDate == stringDate)
+        }*/
 
     @Test
     fun getAgeFromStringBirthDateTest() {

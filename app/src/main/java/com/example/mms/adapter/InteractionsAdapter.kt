@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mms.R
-import com.example.mms.Utils.truncString
-import com.example.mms.model.Doctor
 import com.example.mms.model.Interaction
 
 
@@ -30,7 +28,8 @@ class InteractionsAdapter(
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val interactionMedicineName: TextView = itemView.findViewById<TextView>(R.id.interaction_medicine_name)
+        val interactionMedicineName: TextView =
+            itemView.findViewById(R.id.interaction_medicine_name)
         val interactionType: TextView = itemView.findViewById(R.id.interaction_type)
         val interactionMessage: TextView = itemView.findViewById(R.id.interaction_message)
     }

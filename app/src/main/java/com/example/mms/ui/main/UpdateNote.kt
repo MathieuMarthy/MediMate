@@ -35,7 +35,7 @@ class UpdateNote : AppCompatActivity() {
                 .putExtra("delete", "deleteOk")
                 .putExtra("position", position)
                 .putExtra("id", id)
-            setResult(AppCompatActivity.RESULT_OK, deleteValue)
+            setResult(RESULT_OK, deleteValue)
             finish()
         }
 
@@ -44,10 +44,10 @@ class UpdateNote : AppCompatActivity() {
             val saisi = binding.textNote.text.toString()
 
             val valeurRetour = Intent()
-                                .putExtra(CLE, saisi)
-                                .putExtra("id", id)
-                                .putExtra("position", position)
-            setResult(AppCompatActivity.RESULT_OK, valeurRetour)
+                .putExtra(CLE, saisi)
+                .putExtra("id", id)
+                .putExtra("position", position)
+            setResult(RESULT_OK, valeurRetour)
             finish()
         }
     }

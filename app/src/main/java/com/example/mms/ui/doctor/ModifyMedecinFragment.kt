@@ -2,8 +2,6 @@ package com.example.mms.ui.doctor
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mms.R
 import com.example.mms.database.inApp.SingletonDatabase

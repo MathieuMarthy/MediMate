@@ -12,7 +12,7 @@ import java.time.LocalDateTime
 /**
  * Receiver triggered when the user clicks on the button of a notification.
  */
-class NotifTakesButtonReceiver: BroadcastReceiver() {
+class NotifTakesButtonReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         // check if the intent and the context are not null
@@ -33,7 +33,8 @@ class NotifTakesButtonReceiver: BroadcastReceiver() {
         // check if the hourWeight id and the date are valid
         if (hourWeightId == -1 || dateString == null) {
             // close the notification
-            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.cancel(notifId)
             return
         }
@@ -56,7 +57,8 @@ class NotifTakesButtonReceiver: BroadcastReceiver() {
         }
 
         // close the notification
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancel(notifId)
     }
 }

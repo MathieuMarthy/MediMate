@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.R
+import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.FragmentAddMedicament1Binding
 import com.example.mms.model.medicines.Medicine
 import com.example.mms.ui.main.MInformation
@@ -180,9 +180,10 @@ class AddMedicament1Fragment : Fragment() {
             t.start()
             t.join()
 
-            val versInfoMedicament = Intent(this@AddMedicament1Fragment.context, MInformation::class.java)
-                .putExtra("nom", "${binding.editMedicamentNom.text}")
-                .putExtra("cis", "${medecine?.code_cis}")
+            val versInfoMedicament =
+                Intent(this@AddMedicament1Fragment.context, MInformation::class.java)
+                    .putExtra("nom", "${binding.editMedicamentNom.text}")
+                    .putExtra("cis", "${medecine?.code_cis}")
             startActivity(versInfoMedicament)
         }
 

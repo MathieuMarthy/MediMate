@@ -1,9 +1,7 @@
 package com.example.mms.service
 
 import android.content.Context
-import android.util.Log
 import androidx.test.core.app.ApplicationProvider
-import com.example.mms.constant.TYPE_PRIS_2JOURNALIERE
 import com.example.mms.dao.TakesDAO
 import com.example.mms.dao.TaskDAO
 import com.example.mms.dao.UserDAO
@@ -24,45 +22,125 @@ class GetNumberOfTasksDoneTodayTests {
     private lateinit var userDAO: UserDAO
     private lateinit var takesDAO: TakesDAO
     private lateinit var tasksService: TasksService
-    private var hourWeightId1 : Int = 0
-    private var hourWeightId2 : Int = 0
-    private var hourWeightId3 : Int = 0
+    private var hourWeightId1: Int = 0
+    private var hourWeightId2: Int = 0
+    private var hourWeightId3: Int = 0
 
 
-    fun setUp() {
+    private fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         tasksService = TasksService(context)
         db = SingletonDatabase.getDatabase(context)
         taskDAO = db.taskDao()
         userDAO = db.userDao()
         takesDAO = db.takesDao()
-        val user = User("Doe", "John", "john.doe@mail.com", "01/01/2000", "M", 80, 180, false, "1234", "", "", "", false)
+        val user = User(
+            "Doe",
+            "John",
+            "john.doe@mail.com",
+            "01/01/2000",
+            "M",
+            80,
+            180,
+            false,
+            "1234",
+            "",
+            "",
+            "",
+            false
+        )
         userDAO.insertUser(user)
     }
 
-    private fun getTask1() = Task(1, "oneTake", LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now(), 64793681, "john.doe@mail.com")
-    private fun getTask2() = Task(2, "oneTake", LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now(), 64793681, "john.doe@mail.com")
-    private fun getTask3() = Task(3, "oneTake", LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now(), 64793681, "john.doe@mail.com")
+    private fun getTask1() = Task(
+        1,
+        "oneTake",
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        64793681,
+        "john.doe@mail.com"
+    )
+
+    private fun getTask2() = Task(
+        2,
+        "oneTake",
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        64793681,
+        "john.doe@mail.com"
+    )
+
+    private fun getTask3() = Task(
+        3,
+        "oneTake",
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        64793681,
+        "john.doe@mail.com"
+    )
 
     private fun getHourWeight1() = HourWeight(0, "1", 1)
     private fun getHourWeight2() = HourWeight(0, "2", 1)
     private fun getHourWeight3() = HourWeight(0, "3", 1)
 
-    private fun getTakesTaken1() = Takes(db.hourWeightDao().getLastInserted()!!.id, LocalDateTime.now(), LocalDateTime.now(), true)
-    private fun getTakesTaken2() = Takes(db.hourWeightDao().getLastInserted()!!.id, LocalDateTime.now(), LocalDateTime.now(), true)
-    private fun getTakeNotTaken() = Takes(db.hourWeightDao().getLastInserted()!!.id, LocalDateTime.now(), LocalDateTime.now(), false)
+    private fun getTakesTaken1() = Takes(
+        db.hourWeightDao().getLastInserted()!!.id,
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        true
+    )
 
-    private fun getShowableHourWeight1() = ShowableHourWeight("oneTake", MType("solution buvable","poudre pour solution buvable en sachet-dose","100 mg"), getTask1(), db.hourWeightDao().getHourWeight(hourWeightId1), null)
-    private fun getShowableHourWeight2() = ShowableHourWeight("oneTake", MType("solution buvable","poudre pour solution buvable en sachet-dose","100 mg"), getTask2(), db.hourWeightDao().getHourWeight(hourWeightId2), null)
-    private fun getShowableHourWeight3() = ShowableHourWeight("oneTake", MType("solution buvable","poudre pour solution buvable en sachet-dose","100 mg"), getTask3(), db.hourWeightDao().getHourWeight(hourWeightId3), null)
+    private fun getTakesTaken2() = Takes(
+        db.hourWeightDao().getLastInserted()!!.id,
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        true
+    )
 
-    private fun insertTask(){
+    private fun getTakeNotTaken() = Takes(
+        db.hourWeightDao().getLastInserted()!!.id,
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        false
+    )
+
+    private fun getShowableHourWeight1() = ShowableHourWeight(
+        "oneTake",
+        MType("solution buvable", "poudre pour solution buvable en sachet-dose", "100 mg"),
+        getTask1(),
+        db.hourWeightDao().getHourWeight(hourWeightId1),
+        null
+    )
+
+    private fun getShowableHourWeight2() = ShowableHourWeight(
+        "oneTake",
+        MType("solution buvable", "poudre pour solution buvable en sachet-dose", "100 mg"),
+        getTask2(),
+        db.hourWeightDao().getHourWeight(hourWeightId2),
+        null
+    )
+
+    private fun getShowableHourWeight3() = ShowableHourWeight(
+        "oneTake",
+        MType("solution buvable", "poudre pour solution buvable en sachet-dose", "100 mg"),
+        getTask3(),
+        db.hourWeightDao().getHourWeight(hourWeightId3),
+        null
+    )
+
+    private fun insertTask() {
         taskDAO.insert(getTask1())
         taskDAO.insert(getTask2())
         taskDAO.insert(getTask3())
     }
 
-    private fun insertHourWeightAndTakes(){
+    private fun insertHourWeightAndTakes() {
         db.hourWeightDao().insert(getHourWeight1())
         takesDAO.insert(getTakesTaken1())
         hourWeightId1 = db.hourWeightDao().getLastInserted()!!.id
@@ -75,7 +153,7 @@ class GetNumberOfTasksDoneTodayTests {
     }
 
 
-    private fun clearDatabaseOfTests(){
+    private fun clearDatabaseOfTests() {
         taskDAO.delete(getTask1())
         taskDAO.delete(getTask2())
         taskDAO.delete(getTask3())

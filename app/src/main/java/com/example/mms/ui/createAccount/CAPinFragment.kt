@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +12,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import com.example.mms.database.inApp.AppDatabase
-import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.MainActivity
 import com.example.mms.R
 import com.example.mms.Utils.hashString
+import com.example.mms.database.inApp.AppDatabase
+import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.FragmentCreateAccountPinBinding
 
 class CAPinFragment : Fragment() {
@@ -38,11 +37,11 @@ class CAPinFragment : Fragment() {
         val root: View = binding.root
 
         val navHostFragment =
-            requireActivity().supportFragmentManager.findFragmentById(com.example.mms.R.id.nav_create_account) as NavHostFragment
+            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_create_account) as NavHostFragment
         val navController = navHostFragment.navController
 
         binding.codePin.backButton.buttonArrowBack.setOnClickListener {
-            navController.navigate(com.example.mms.R.id.action_navigation_CAPin_to_navigation_CAInformations)
+            navController.navigate(R.id.action_navigation_CAPin_to_navigation_CAInformations)
         }
 
         // set text and styles
@@ -80,7 +79,10 @@ class CAPinFragment : Fragment() {
         )
 
         // Set input type to number and max length to 1
-        listCodePin.forEach { it.inputType = InputType.TYPE_CLASS_NUMBER; it.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(1))}
+        listCodePin.forEach {
+            it.inputType = InputType.TYPE_CLASS_NUMBER; it.filters =
+            arrayOf<InputFilter>(InputFilter.LengthFilter(1))
+        }
 
         binding.codePin.buttonDelete.setOnClickListener {
             if (currentIndex > 0) {
@@ -114,7 +116,8 @@ class CAPinFragment : Fragment() {
         binding.buttonCreate.setOnClickListener {
             // Check if all fields are filled
             if (listCodePin[0].text.toString() == "" || listCodePin[1].text.toString() == "" || listCodePin[2].text.toString() == "" || listCodePin[3].text.toString() == "") {
-                Toast.makeText(requireContext(), getString(R.string.pin_empty), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.pin_empty), Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 Thread {
                     // set codePin and isLinkedToBiometric to user

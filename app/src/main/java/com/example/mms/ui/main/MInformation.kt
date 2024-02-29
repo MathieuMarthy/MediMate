@@ -6,7 +6,7 @@ import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.ActivityInfoMedicamentBinding
 import com.example.mms.model.medicines.Medicine
 
-class MInformation: AppCompatActivity() {
+class MInformation : AppCompatActivity() {
     private lateinit var binding: ActivityInfoMedicamentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,8 @@ class MInformation: AppCompatActivity() {
         binding.nomMedicament.text = intent.extras?.getString("nom")
         binding.codeCisText.text = cis
         binding.typeText.text = medicine?.type?.generic.toString()
-        binding.compoText.text = "${medicine?.composition?.substance_name} ${medicine?.composition?.substance_dosage}"
+        binding.compoText.text =
+            "${medicine?.composition?.substance_name} ${medicine?.composition?.substance_dosage}"
         binding.usageText.text = medicine?.usage?.route_administration.toString()
 
 
