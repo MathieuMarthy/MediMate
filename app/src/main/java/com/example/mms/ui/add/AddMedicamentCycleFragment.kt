@@ -31,7 +31,7 @@ class AddMedicamentCycleFragment : Fragment() {
         val cycle = viewModel.cycle.value
         if (cycle != null && cycle.isNotEmpty()) {
             // 24 to convert hours to days
-            binding.inputTreatementDuration.setText((cycle!!.hoursOfTreatment / 24).toString())
+            binding.inputTreatementDuration.setText((cycle.hoursOfTreatment / 24).toString())
             binding.inputTreatementRest.setText((cycle.hoursOfRest / 24).toString())
         }
 

@@ -34,9 +34,9 @@ class DailyAdapter(
      * @param parent the parent view
      * @param viewType the view type
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_dairy, parent, false)
-        return DailyAdapter.MyViewHolder(view)
+        return MyViewHolder(view)
     }
 
     /**
@@ -44,7 +44,7 @@ class DailyAdapter(
      * @param holder the view holder
      * @param position the position of the item
      */
-    override fun onBindViewHolder(holder: DailyAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = this.items[position]
         holder.textJournal.text = item.note
         holder.itemView.setOnClickListener {

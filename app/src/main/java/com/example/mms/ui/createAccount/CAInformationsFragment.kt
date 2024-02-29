@@ -23,7 +23,6 @@ import java.util.Calendar
 class CAInformationsFragment : Fragment() {
 
     private var _binding: FragmentCreateAccountInformationsBinding? = null
-    private lateinit var db: AppDatabase
 
     private val binding get() = _binding!!
 
@@ -38,7 +37,6 @@ class CAInformationsFragment : Fragment() {
 
         _binding = FragmentCreateAccountInformationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        db = SingletonDatabase.getDatabase(requireContext())
 
         // set user's information
         binding.editNom.setText(viewModel.userData.value?.name)

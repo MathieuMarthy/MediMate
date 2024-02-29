@@ -18,7 +18,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var db: AppDatabase
     private lateinit var adapter: AccountAdapter
-    private lateinit var users: List<User>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

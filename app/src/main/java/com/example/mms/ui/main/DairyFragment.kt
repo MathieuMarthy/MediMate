@@ -16,7 +16,6 @@ import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.FragmentDairyBinding
 import com.example.mms.model.DairyNote
-import com.example.mms.service.DairyService
 import com.example.mms.ui.add.AddNote
 
 class DairyFragment : Fragment() {
@@ -26,7 +25,6 @@ class DairyFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
     private lateinit var textAdapter: DailyAdapter
-    private lateinit var dairyService: DairyService
     private lateinit var note: DairyNote
     private lateinit var db: AppDatabase
 
@@ -35,7 +33,6 @@ class DairyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dairyService = DairyService(requireContext())
         db = SingletonDatabase.getDatabase(requireContext())
 
         this._binding = FragmentDairyBinding.inflate(inflater, container, false)
