@@ -117,7 +117,7 @@ class AddMedicamentJoursSpecifiquesFragment : Fragment() {
         }
 
         binding.nextButton.setOnClickListener {
-            if (this.weekOfSpecificDaysService.getFlat().size == 0) {
+            if (this.weekOfSpecificDaysService.getFlat().isEmpty()) {
                 requireActivity().runOnUiThread {
                     Toast.makeText(
                         this.requireContext(),

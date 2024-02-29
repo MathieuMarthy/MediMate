@@ -120,11 +120,11 @@ class ChooseMedicamentActivity : AppCompatActivity() {
             )
         }
 
-        builder.setPositiveButton(this.getString(R.string.oui)) { dialog, which ->
+        builder.setPositiveButton(this.getString(R.string.oui)) { _, _ ->
             this.goToMain()
         }
 
-        builder.setNegativeButton(this.getString(R.string.non)) { dialog, which ->
+        builder.setNegativeButton(this.getString(R.string.non)) { dialog, _ ->
             dialog.dismiss()
         }
 

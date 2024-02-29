@@ -86,7 +86,7 @@ fun getFormattedDate(dateTime: LocalDateTime): String {
 }
 
 fun getNewCalendarDayList(
-    previousCalendarDays: MutableList<CalendarDay>,
+    previousCalendarDays: List<CalendarDay>,
     daySelected: Date,
     context: Context
 ): MutableList<CalendarDay> {
@@ -147,7 +147,6 @@ fun getNewCalendarDayList(
         } else {
             val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
             val isSelected = (daySelected == date)
-            // val listOfTask = getRandomTaskHourTypeAndMedicineList(context)
             var listOfTask = mutableListOf<Task>()
             t = Thread {
                 listOfTask = tasksService.getTasksAt(email, date)

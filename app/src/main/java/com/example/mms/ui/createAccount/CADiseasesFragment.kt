@@ -30,16 +30,6 @@ class CADiseasesFragment : Fragment() {
         _binding = FragmentCreateAccountDiseasesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-        /*
-        binding.backButton.buttonArrowBack.setOnClickListener {
-            navController.navigate(com.example.mms.R.id.action_navigation_CADiseases_to_navigation_CAInformations)
-        }
-
-        binding.buttonSuivant.setOnClickListener {
-            navController.navigate(com.example.mms.R.id.action_navigation_CADiseases_to_navigation_CAPin)
-        }*/
-
         val currentUser = viewModel.userData.value!!
 
         binding.buttonAddHealthDisease.setOnClickListener {

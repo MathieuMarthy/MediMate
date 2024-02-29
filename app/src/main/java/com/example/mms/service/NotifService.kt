@@ -133,7 +133,7 @@ class NotifService(
      * @param showableHourWeights The list of notifications to planify
      */
     @RequiresApi(Build.VERSION_CODES.S)
-    fun planifyTakesNotifications(showableHourWeights: MutableList<ShowableHourWeight>) {
+    fun planifyTakesNotifications(showableHourWeights: List<ShowableHourWeight>) {
         for (hourWeight in showableHourWeights) {
             this.planifyOneNotification(hourWeight)
         }

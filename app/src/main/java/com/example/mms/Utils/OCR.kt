@@ -164,12 +164,10 @@ class OCR(private val db: AppDatabase) {
     private fun removeSpaceBetweenNumbers(text: String): String {
         var res = ""
         for (i in text.indices) {
-            if (text[i] == ' ') {
-                if (i > 0 && i < text.length - 1) {
-                    if (text[i - 1] in '0'..'9' && text[i + 1] in '0'..'9') {
-                        continue
-                    }
-                }
+            if (text[i] == ' ' &&
+                i > 0 && i < text.length - 1 &&
+                text[i - 1] in '0'..'9' && text[i + 1] in '0'..'9') {
+                continue
             }
             res += text[i]
         }

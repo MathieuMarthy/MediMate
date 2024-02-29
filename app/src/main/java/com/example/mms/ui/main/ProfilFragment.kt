@@ -28,7 +28,7 @@ class ProfilFragment : Fragment() {
     private val binding get() = _binding!!
 
     // We use this to get the result of the ModifyAccountActivity
-    private val modifyContrat: ActivityResultLauncher<Void?> = registerForActivityResult(
+    private val modifyContrat: ActivityResultLauncher<Unit?> = registerForActivityResult(
         ModifiyAccountContrat()
     ) {
         if (it.name != "") {

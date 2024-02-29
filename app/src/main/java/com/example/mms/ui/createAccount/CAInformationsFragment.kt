@@ -40,7 +40,6 @@ class CAInformationsFragment : Fragment() {
         binding.editBirthdate.setText(viewModel.userData.value?.birthday ?: "----")
         binding.editTaille.setText(viewModel.userData.value?.height?.toString() ?: "")
         binding.editPoids.setText(viewModel.userData.value?.height?.toString() ?: "")
-        //binding.spinnerSexe.setSelection(viewModel.userData.value?.sexe.toString().toInt())
 
         binding.editBirthdate.keyListener = null
         binding.editBirthdate.isFocusable = false
@@ -71,7 +70,7 @@ class CAInformationsFragment : Fragment() {
 
         // regex for name and surname
         val nameSurnameRegex = Regex("^[a-zA-ZÀ-ÿ-'\\s]+$")
-        val nameSurnameFilter = InputFilter { source, start, end, dest, dstart, dend ->
+        val nameSurnameFilter = InputFilter { source, _, _, _, _, _ ->
             if (source != null && !source.toString().matches(nameSurnameRegex)) {
                 ""  // Si le texte ne correspond pas à la regex, le caractère est supprimé
             } else {
