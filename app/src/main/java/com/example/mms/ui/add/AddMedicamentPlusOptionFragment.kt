@@ -19,8 +19,6 @@ class AddMedicamentPlusOptionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val viewModel = ViewModelProvider(requireActivity())[SharedAMViewModel::class.java]
-
         _binding = FragmentAddMedicamentPlusOptionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

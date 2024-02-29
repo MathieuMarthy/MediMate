@@ -71,7 +71,7 @@ class AddMedicamentUnOuPlusParJourFragment : Fragment() {
 
         binding.nextButton.setOnClickListener {
             // check if the list is empty
-            if (this.hourWeightList.size == 0) {
+            if (this.hourWeightList.isEmpty()) {
                 requireActivity().runOnUiThread {
                     Toast.makeText(
                         this.requireContext(),

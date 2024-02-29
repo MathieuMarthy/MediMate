@@ -168,7 +168,6 @@ class AddMedicament1Fragment : Fragment() {
 
         // When info button clicked, go to information page (MInformation.kt) with name and code_cis
         binding.infoButton.setOnClickListener {
-            // TODO Warning - Some medicine deos not have a form or a weight. The code CIS cannot be obtain
             val forme = binding.spinnerForme.selectedItem.toString()
             val dosage = binding.spinnerDosage.selectedItem.toString()
             var medecine: Medicine? = null

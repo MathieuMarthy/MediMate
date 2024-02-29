@@ -43,10 +43,9 @@ class LoaderActivity : AppCompatActivity() {
         db = SingletonDatabase.getDatabase(this)
 
         // Set the midnight alarm if it's not already set
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (!this.isMidnightAlarmSet()) {
-                this.startMidnightAlarmManager()
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+            !this.isMidnightAlarmSet()) {
+            this.startMidnightAlarmManager()
         }
 
         // == Update the medicines database ==

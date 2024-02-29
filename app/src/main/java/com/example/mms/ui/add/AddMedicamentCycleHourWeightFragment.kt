@@ -66,7 +66,7 @@ class AddMedicamentCycleHourWeightFragment : Fragment() {
         }
 
         binding.nextButton.setOnClickListener {
-            if (this.hourWeightList.size == 0) {
+            if (this.hourWeightList.isEmpty()) {
                 requireActivity().runOnUiThread {
                     Toast.makeText(
                         this.requireContext(),
