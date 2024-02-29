@@ -95,14 +95,14 @@ class MedicineStorageService(val context: Context, val view: View) {
                 )
 
                 // Add a button to dismiss the snackbar
-                snackbar.setAction("X", View.OnClickListener {
+                snackbar.setAction("X", {
                     snackbar.dismiss()
                 })
 
                 // Add a button to update the storage
                 snackbar.setAction(
                     this.context.getString(R.string.gerer_stock),
-                    View.OnClickListener {
+                    {
                         dialogGererStock(medicineStorage, medicineName, takesAdapter)
                         snackbar.dismiss()
                     })

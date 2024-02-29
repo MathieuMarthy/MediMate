@@ -36,7 +36,7 @@ class InteractionDao(context: Context) {
             }
         }
 
-        return medicineInteractions.map { it ->
+        return medicineInteractions.map {
             Interaction(
                 it.key,
                 it.value["type"] ?: "",

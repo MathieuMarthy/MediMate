@@ -13,11 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.mms.R
 import com.example.mms.Utils.isEmailValid
-import com.example.mms.database.inApp.AppDatabase
-import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.FragmentCreateAccountInformationsBinding
 import com.example.mms.model.User
-import kotlinx.coroutines.DelicateCoroutinesApi
 import java.util.Calendar
 
 class CAInformationsFragment : Fragment() {
@@ -26,7 +23,6 @@ class CAInformationsFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,7 +55,7 @@ class CAInformationsFragment : Fragment() {
             // build date picker dialog
             val datePickerDialog = DatePickerDialog(
                 root.context,
-                DatePickerDialog.OnDateSetListener { view, selectedYear, selectedMonth, selectedDay ->
+                { view, selectedYear, selectedMonth, selectedDay ->
                     val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
                     binding.editBirthdate.setText(selectedDate)
                 },

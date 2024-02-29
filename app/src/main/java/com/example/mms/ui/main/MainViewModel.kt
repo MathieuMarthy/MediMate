@@ -15,5 +15,4 @@ class MainViewModel : ViewModel() {
         _userData.value = user
     }
 
-    private val _medecinName = MutableLiveData<String>()
 }

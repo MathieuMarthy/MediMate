@@ -240,7 +240,7 @@ class ConseilsFragment : Fragment() {
                     myLocationOverlay.isDrawAccuracyEnabled = true
                     myLocationOverlay.runOnFirstFix {
                         Looper.myLooper()
-                            ?.let { _ -> controller.animateTo(myLocationOverlay.myLocation) }
+                            ?.let { controller.animateTo(myLocationOverlay.myLocation) }
                     }
                 }
             }

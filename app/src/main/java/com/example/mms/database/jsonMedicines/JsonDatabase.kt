@@ -36,14 +36,14 @@ class JsonDatabase(
     private fun getMedicinesFromJson(): List<Medicine> {
         return Json {
             ignoreUnknownKeys = true
-        }.decodeFromString<List<Medicine>>(this.getJsonContent(this.dbMedicineFileName))
+        }.decodeFromString(this.getJsonContent(this.dbMedicineFileName))
     }
 
     /**
      * Returns the side effects from the json database
      */
     fun getSideEffects(): Map<String, Map<String, String>> {
-        return Json.decodeFromString<Map<String, Map<String, String>>>(this.getJsonContent(this.dbSideEffectsFileName))
+        return Json.decodeFromString(this.getJsonContent(this.dbSideEffectsFileName))
     }
 
     /**

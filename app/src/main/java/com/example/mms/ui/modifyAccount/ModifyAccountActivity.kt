@@ -102,7 +102,7 @@ class ModifyAccountActivity : AppCompatActivity() {
                     // create date picker dialog
                     val datePickerDialog = DatePickerDialog(
                         this,
-                        DatePickerDialog.OnDateSetListener { view, selectedYear, selectedMonth, selectedDay ->
+                        { view, selectedYear, selectedMonth, selectedDay ->
                             val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
                             binding.editBirthdate.setText(selectedDate)
                         },

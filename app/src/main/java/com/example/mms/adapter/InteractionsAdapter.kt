@@ -29,7 +29,7 @@ class InteractionsAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val interactionMedicineName: TextView =
-            itemView.findViewById<TextView>(R.id.interaction_medicine_name)
+            itemView.findViewById(R.id.interaction_medicine_name)
         val interactionType: TextView = itemView.findViewById(R.id.interaction_type)
         val interactionMessage: TextView = itemView.findViewById(R.id.interaction_message)
     }
