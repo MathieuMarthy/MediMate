@@ -1,9 +1,8 @@
 package com.example.mms.model
 
-import android.mtp.MtpConstants
 import com.example.mms.model.medicines.MType
 
-class ShowableHourWeight (
+class ShowableHourWeight(
     val medicineName: String,
     val medicineType: MType,
     val task: Task,

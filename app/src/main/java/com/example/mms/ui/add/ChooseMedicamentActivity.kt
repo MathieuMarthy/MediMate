@@ -17,19 +17,18 @@ import com.example.mms.contrat.AddTaskFromOCR
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.ActivityChooseMedicamentBinding
-import com.example.mms.ui.main.AccueilFragment
 
 class ChooseMedicamentActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChooseMedicamentBinding
-    private lateinit var medicamentsFound : List<OCR.MedicationInfo>
-    private lateinit var hashmapTaskId : HashMap<Int,Long>
+    private lateinit var medicamentsFound: List<OCR.MedicationInfo>
+    private lateinit var hashmapTaskId: HashMap<Int, Long>
     private var contratLaunchedPosition = -1
 
     private lateinit var adapter: MediChooseAdapter
-    private lateinit var db : AppDatabase
+    private lateinit var db: AppDatabase
 
-    private var contratAddFromOCR : ActivityResultLauncher<String?> = registerForActivityResult(
+    private var contratAddFromOCR: ActivityResultLauncher<String?> = registerForActivityResult(
         AddTaskFromOCR()
     ) {
         Log.d("ChooseMedicamentActivity", "taskId: $it $contratLaunchedPosition")
@@ -67,14 +66,16 @@ class ChooseMedicamentActivity : AppCompatActivity() {
 
         db = SingletonDatabase.getDatabase(this)
 
-        medicamentsFound = intent.extras?.getParcelableArrayList<OCR.MedicationInfo>("medicamentFound") as List<OCR.MedicationInfo>
+        medicamentsFound =
+            intent.extras?.getParcelableArrayList<OCR.MedicationInfo>("medicamentFound") as List<OCR.MedicationInfo>
         hashmapTaskId = HashMap()
 
         val listMedicamentView = binding.medicamentRecyclerView
         adapter = MediChooseAdapter(this, db, medicamentsFound, hashmapTaskId)
 
         if (medicamentsFound.isEmpty()) {
-            Toast.makeText(this, getString(R.string.aucun_medicament_trouve), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.aucun_medicament_trouve), Toast.LENGTH_SHORT)
+                .show()
             this.goToMain()
         } else {
             listMedicamentView.layoutManager = LinearLayoutManager(this)
@@ -104,9 +105,19 @@ class ChooseMedicamentActivity : AppCompatActivity() {
 
         val nbMedicament = hashmapTaskId.size
         if (nbMedicament == 1) {
-            builder.setMessage(this.getString(R.string.confirmation_message_ocr_add, nbMedicament.toString()))
+            builder.setMessage(
+                this.getString(
+                    R.string.confirmation_message_ocr_add,
+                    nbMedicament.toString()
+                )
+            )
         } else {
-            builder.setMessage(this.getString(R.string.confirmation_message_ocr_add_pluriel, nbMedicament.toString()))
+            builder.setMessage(
+                this.getString(
+                    R.string.confirmation_message_ocr_add_pluriel,
+                    nbMedicament.toString()
+                )
+            )
         }
 
         builder.setPositiveButton(this.getString(R.string.oui)) { dialog, which ->

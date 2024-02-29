@@ -18,7 +18,7 @@ import com.example.mms.adapter.Interface.OnItemClickListener
 import com.example.mms.databinding.FragmentAddMedicamentCycleHourweightBinding
 import com.example.mms.model.HourWeight
 
-class AddMedicamentCycleHourWeightFragment: Fragment() {
+class AddMedicamentCycleHourWeightFragment : Fragment() {
     private var _binding: FragmentAddMedicamentCycleHourweightBinding? = null
     private val binding get() = _binding!!
 

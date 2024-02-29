@@ -1,16 +1,12 @@
 package com.example.mms.dao
 
 import android.content.Context
-import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
 import androidx.room.Query
 import androidx.test.core.app.ApplicationProvider
-import com.example.mms.constant.TYPE_PRIS_2JOURNALIERE
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
-import com.example.mms.model.medicines.MType
 import com.example.mms.model.medicines.Medicine
-import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class MedicineDAOTest {
@@ -85,4 +81,5 @@ class MedicineDAOTest {
 }
 
 @Query("DELETE FROM Medicine WHERE code_cis = :code_cis")
-private fun MedicineDAO.delete(code_cis: Long){}
+private fun MedicineDAO.delete(code_cis: Long) {
+}

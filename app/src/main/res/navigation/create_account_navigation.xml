@@ -19,7 +19,7 @@
         android:id="@+id/navigation_CADiseases"
         android:name="com.example.mms.ui.createAccount.CADiseasesFragment"
         android:label="CADiseasesFragment"
-        tools:layout="@layout/fragment_create_account_diseases"/>
+        tools:layout="@layout/fragment_create_account_diseases" />
 
     <fragment
         android:id="@+id/navigation_CAPin"

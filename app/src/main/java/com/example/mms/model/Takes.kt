@@ -17,7 +17,7 @@ import java.time.LocalDateTime
         )
     ]
 )
-class Takes (
+class Takes(
     var hourWeightId: Int,
     var date: LocalDateTime,
     var takeAt: LocalDateTime,

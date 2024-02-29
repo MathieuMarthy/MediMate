@@ -34,7 +34,9 @@ class JsonDatabase(
      * @return The medicines from the json database
      */
     private fun getMedicinesFromJson(): List<Medicine> {
-        return Json{ ignoreUnknownKeys = true }.decodeFromString<List<Medicine>>(this.getJsonContent(this.dbMedicineFileName))
+        return Json {
+            ignoreUnknownKeys = true
+        }.decodeFromString<List<Medicine>>(this.getJsonContent(this.dbMedicineFileName))
     }
 
     /**

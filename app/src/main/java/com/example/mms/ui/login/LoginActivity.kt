@@ -46,7 +46,8 @@ class LoginActivity : AppCompatActivity() {
             if (connectedUser != null) {
                 // if there is a connected user, go to locked activity
                 val intent = Intent(this, LockedActivity::class.java)
-                intent.putExtra("userEmail", connectedUser.email).putExtra("isLinkedToBiometric", connectedUser.isLinkedToBiometric)
+                intent.putExtra("userEmail", connectedUser.email)
+                    .putExtra("isLinkedToBiometric", connectedUser.isLinkedToBiometric)
                 startActivity(intent)
                 finish()
             }
@@ -55,7 +56,8 @@ class LoginActivity : AppCompatActivity() {
             adapter.setOnItemClickListener(object : OnItemClickListener {
                 override fun onItemClick(position: Int) {
                     val intent = Intent(this@LoginActivity, LockedActivity::class.java)
-                    intent.putExtra("userEmail", users[position].email).putExtra("isLinkedToBiometric", users[position].isLinkedToBiometric)
+                    intent.putExtra("userEmail", users[position].email)
+                        .putExtra("isLinkedToBiometric", users[position].isLinkedToBiometric)
                     startActivity(intent)
                     finish()
                 }

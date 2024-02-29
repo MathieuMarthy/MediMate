@@ -22,7 +22,7 @@ import androidx.room.ForeignKey
     ],
     primaryKeys = ["cycleId", "hourWeightId"]
 )
-class CycleHourWeight (
+class CycleHourWeight(
     var cycleId: Int,
     var hourWeightId: Int
 )

@@ -21,22 +21,24 @@ import com.example.mms.model.CycleHourWeight
 import com.example.mms.model.DairyNote
 import com.example.mms.model.Doctor
 import com.example.mms.model.HourWeight
+import com.example.mms.model.MedicineStorage
 import com.example.mms.model.OneTake
 import com.example.mms.model.SpecificDaysHourWeight
 import com.example.mms.model.Takes
 import com.example.mms.model.Task
 import com.example.mms.model.User
-import com.example.mms.model.MedicineStorage
 import com.example.mms.model.Version
 import com.example.mms.model.medicines.Medicine
 
 // Declaration of the database
-@Database(entities = [
-    User::class, Medicine::class, Task::class, Cycle::class,
-    CycleHourWeight::class, HourWeight::class,
-    SpecificDaysHourWeight::class, Takes::class, OneTake::class,
-    MedicineStorage::class, Version::class, DairyNote::class, Doctor::class
-], version = 8)
+@Database(
+    entities = [
+        User::class, Medicine::class, Task::class, Cycle::class,
+        CycleHourWeight::class, HourWeight::class,
+        SpecificDaysHourWeight::class, Takes::class, OneTake::class,
+        MedicineStorage::class, Version::class, DairyNote::class, Doctor::class
+    ], version = 8
+)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDAO

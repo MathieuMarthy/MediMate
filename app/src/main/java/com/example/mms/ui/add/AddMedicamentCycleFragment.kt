@@ -12,7 +12,7 @@ import com.example.mms.Utils.goToInAddFragments
 import com.example.mms.databinding.FragmentAddMedicamentCycleBinding
 import com.example.mms.model.Cycle
 
-class AddMedicamentCycleFragment: Fragment() {
+class AddMedicamentCycleFragment : Fragment() {
     private var _binding: FragmentAddMedicamentCycleBinding? = null
     private val binding get() = _binding!!
 
@@ -48,7 +48,10 @@ class AddMedicamentCycleFragment: Fragment() {
             // check if the values are correct
             val errorMessage = when (true) {
                 (cycleDuration == "" || cycleRest == "") -> getString(R.string.fill_fields)
-                (cycleDuration.toIntOrNull() == null || cycleRest.toIntOrNull() == null) -> getString(R.string.check_fields)
+                (cycleDuration.toIntOrNull() == null || cycleRest.toIntOrNull() == null) -> getString(
+                    R.string.check_fields
+                )
+
                 (cycleDuration.toInt() < 1) -> getString(R.string.cycle_duration_too_short)
                 else -> ""
             }

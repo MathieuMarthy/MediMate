@@ -3,22 +3,20 @@ package com.example.mms.ui.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.mms.database.inApp.AppDatabase
-import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.R
 import com.example.mms.Utils.getAgeFromStringBirthDate
 import com.example.mms.contrat.ModifiyAccountContrat
+import com.example.mms.database.inApp.AppDatabase
+import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.FragmentProfilBinding
 import com.example.mms.service.TasksService
 import com.example.mms.ui.loader.LoaderActivity
-import com.example.mms.ui.modifyAccount.ModifyAccountActivity
 import com.example.mms.ui.settings.SettingsActivity
 
 class ProfilFragment : Fragment() {
@@ -30,7 +28,7 @@ class ProfilFragment : Fragment() {
     private val binding get() = _binding!!
 
     // We use this to get the result of the ModifyAccountActivity
-    val modifyContrat : ActivityResultLauncher<Void?> = registerForActivityResult(
+    val modifyContrat: ActivityResultLauncher<Void?> = registerForActivityResult(
         ModifiyAccountContrat()
     ) {
         if (it.name != "") {
@@ -77,12 +75,15 @@ class ProfilFragment : Fragment() {
                     // We set the progress bar and the text
                     binding.progressBarTakes.setProgress(takesPercent)
                     binding.percentTaken.text = takesPercent.toString() + "%"
-                    binding.nbDoses.text = takesDone.toString() + " " + resources.getString(R.string.doses)
-                    if(takesDone == 0) binding.felicitations.text = ""
-                    if(takesPercent <= 50) {
-                        binding.felicitations.text = resources.getString(R.string.des_efforts_sont_faire)
-                    }else {
-                        binding.felicitations.text = resources.getString(R.string.bravo_vous_tes_r_gulier)
+                    binding.nbDoses.text =
+                        takesDone.toString() + " " + resources.getString(R.string.doses)
+                    if (takesDone == 0) binding.felicitations.text = ""
+                    if (takesPercent <= 50) {
+                        binding.felicitations.text =
+                            resources.getString(R.string.des_efforts_sont_faire)
+                    } else {
+                        binding.felicitations.text =
+                            resources.getString(R.string.bravo_vous_tes_r_gulier)
                     }
                 }
             }

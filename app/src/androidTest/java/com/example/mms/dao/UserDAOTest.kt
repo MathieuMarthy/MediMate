@@ -1,12 +1,10 @@
 package com.example.mms.dao
 
 import android.content.Context
-import android.database.sqlite.SQLiteConstraintException
 import androidx.test.core.app.ApplicationProvider
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.model.User
-import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class UserDAOTest {

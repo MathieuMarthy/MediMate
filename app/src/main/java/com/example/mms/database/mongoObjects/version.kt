@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property updated_documents_cis The cis of the updated documents
  */
 @Serializable
-class MongoVersion (
+class MongoVersion(
     var version: Int,
     var updated_documents_cis: List<Int>,
 ) {

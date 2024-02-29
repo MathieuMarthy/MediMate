@@ -11,7 +11,7 @@ import com.example.mms.service.TasksService
 /**
  * Receiver triggered at midnight to planify daily notifications.
  */
-class MidnightAlarmReceiver: BroadcastReceiver() {
+class MidnightAlarmReceiver : BroadcastReceiver() {
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onReceive(context: Context?, intent: Intent?) {

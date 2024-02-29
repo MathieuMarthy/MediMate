@@ -5,7 +5,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 
 @Entity(tableName = "user", primaryKeys = ["email"])
-data class User (
+data class User(
     var name: String,
     var surname: String,
     val email: String,
@@ -13,12 +13,12 @@ data class User (
     val sexe: String,
     var weight: Int,
     var height: Int,
-    val isConnected : Boolean = false,
-    var codePin : String,
-    var listHealthDiseases : String,
-    var listDietPlan : String,
-    var listAllergies : String,
-    var isLinkedToBiometric : Boolean = false,
+    val isConnected: Boolean = false,
+    var codePin: String,
+    var listHealthDiseases: String,
+    var listDietPlan: String,
+    var listAllergies: String,
+    var isLinkedToBiometric: Boolean = false,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,

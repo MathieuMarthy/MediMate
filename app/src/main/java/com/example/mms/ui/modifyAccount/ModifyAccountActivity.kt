@@ -5,21 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
+import com.example.mms.R
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.database.inApp.SingletonDatabase
-import com.example.mms.R
-import com.example.mms.constant.listAllergies
-import com.example.mms.constant.listDietPlan
-import com.example.mms.constant.listHealthDiseases
 import com.example.mms.databinding.ActivityModifyAccountInformationBinding
-import com.example.mms.ui.createAccount.Dialog.CustomDialogDiseasses
-import com.example.mms.ui.main.MainViewModel
-import com.example.mms.ui.main.ProfilFragment
 import java.util.Calendar
 
 class ModifyAccountActivity : AppCompatActivity() {
@@ -47,56 +38,56 @@ class ModifyAccountActivity : AppCompatActivity() {
                 binding.editPoids.inputType = InputType.TYPE_CLASS_NUMBER
                 binding.editPoids.filters = arrayOf(InputFilter.LengthFilter(3))
                 binding.editTaille.inputType = InputType.TYPE_CLASS_NUMBER
-                binding.editTaille.filters =  arrayOf(InputFilter.LengthFilter(3))
+                binding.editTaille.filters = arrayOf(InputFilter.LengthFilter(3))
 
                 // Partie soucis de santé / allergies / régime non implémentée
                 /**
                 binding.buttonAddHealthDisease.setOnClickListener {
-                    val selectedHealthDiseases = user.listHealthDiseases?.split(",")!!.toList()
-                    val dialog = CustomDialogDiseasses(this, listHealthDiseases, selectedHealthDiseases) {
-                        it.forEachIndexed { index, healthDisease ->
-                            user.listHealthDiseases += if (index < it.size - 1) { "$healthDisease," } else { healthDisease }
-                        }
-                        binding.editSoucis.text = getString(R.string.elements_selectionnes, it.size.toString())
-                    }
-                    dialog.show()
+                val selectedHealthDiseases = user.listHealthDiseases?.split(",")!!.toList()
+                val dialog = CustomDialogDiseasses(this, listHealthDiseases, selectedHealthDiseases) {
+                it.forEachIndexed { index, healthDisease ->
+                user.listHealthDiseases += if (index < it.size - 1) { "$healthDisease," } else { healthDisease }
+                }
+                binding.editSoucis.text = getString(R.string.elements_selectionnes, it.size.toString())
+                }
+                dialog.show()
 
-                    dialog.setOnDismissListener {
-                        val updatedSelectedAllergies = user.listAllergies.split(",").toList()
-                        dialog.updateSelectedItems(updatedSelectedAllergies)
-                    }
+                dialog.setOnDismissListener {
+                val updatedSelectedAllergies = user.listAllergies.split(",").toList()
+                dialog.updateSelectedItems(updatedSelectedAllergies)
+                }
                 }
                 binding.buttonAddAllergies.setOnClickListener {
-                    val selectedAllergies = user.listAllergies.split(",").toList()
-                    val dialog = CustomDialogDiseasses(this, listAllergies, selectedAllergies) {
-                        it.forEachIndexed { index, allergie ->
-                            user.listAllergies += if (index < it.size - 1) { "$allergie," } else { allergie }
-                        }
-                        binding.editAllergies.text = getString(R.string.elements_selectionnes, it.size.toString())
-                    }
-                    dialog.show()
+                val selectedAllergies = user.listAllergies.split(",").toList()
+                val dialog = CustomDialogDiseasses(this, listAllergies, selectedAllergies) {
+                it.forEachIndexed { index, allergie ->
+                user.listAllergies += if (index < it.size - 1) { "$allergie," } else { allergie }
+                }
+                binding.editAllergies.text = getString(R.string.elements_selectionnes, it.size.toString())
+                }
+                dialog.show()
 
-                    dialog.setOnDismissListener {
-                        val updatedSelectedAllergies = user.listAllergies.split(",").toList()
-                        dialog.updateSelectedItems(updatedSelectedAllergies)
-                    }
+                dialog.setOnDismissListener {
+                val updatedSelectedAllergies = user.listAllergies.split(",").toList()
+                dialog.updateSelectedItems(updatedSelectedAllergies)
+                }
                 }
                 binding.buttonAddDietPlan.setOnClickListener {
-                    val selectedDietPlan = user.listDietPlan.split(",").toList()
-                    val dialog = CustomDialogDiseasses(this, listDietPlan, selectedDietPlan) {
-                        it.forEachIndexed { index, dietPlan ->
-                            user.listDietPlan += if (index < it.size - 1) { "$dietPlan," } else { dietPlan }
-                        }
-                        binding.editRegime.text = getString(R.string.elements_selectionnes, it.size.toString())
-                    }
-                    dialog.show()
-
-                    dialog.setOnDismissListener {
-                        val updatedSelectedAllergies = user.listDietPlan.split(",").toList()
-                        dialog.updateSelectedItems(updatedSelectedAllergies)
-                    }
+                val selectedDietPlan = user.listDietPlan.split(",").toList()
+                val dialog = CustomDialogDiseasses(this, listDietPlan, selectedDietPlan) {
+                it.forEachIndexed { index, dietPlan ->
+                user.listDietPlan += if (index < it.size - 1) { "$dietPlan," } else { dietPlan }
                 }
-                **/
+                binding.editRegime.text = getString(R.string.elements_selectionnes, it.size.toString())
+                }
+                dialog.show()
+
+                dialog.setOnDismissListener {
+                val updatedSelectedAllergies = user.listDietPlan.split(",").toList()
+                dialog.updateSelectedItems(updatedSelectedAllergies)
+                }
+                }
+                 **/
                 binding.editBirthdate.keyListener = null
                 binding.editBirthdate.isFocusable = false
 
@@ -165,7 +156,7 @@ class ModifyAccountActivity : AppCompatActivity() {
                         user.height = height
 
                         // update user
-                        Thread{
+                        Thread {
                             db.userDao().updateUser(user)
                         }.start()
 

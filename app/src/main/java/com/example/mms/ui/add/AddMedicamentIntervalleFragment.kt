@@ -83,7 +83,7 @@ class AddMedicamentIntervalleFragment : Fragment() {
             )
 
             // store the interval
-            val cycle = Cycle(0,0,24,0,0, hourWeightList)
+            val cycle = Cycle(0, 0, 24, 0, 0, hourWeightList)
             viewModel.setCycle(cycle)
 
             goToInAddFragments(requireActivity(), R.id.action_AMIntervalle_to_AMStorage)

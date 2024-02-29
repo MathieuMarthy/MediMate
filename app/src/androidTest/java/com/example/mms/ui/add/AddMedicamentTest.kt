@@ -25,19 +25,19 @@ class AddMedicamentTest {
     }
 
     @Test
-    fun testPresenceListeDeroulanteDosage(){
+    fun testPresenceListeDeroulanteDosage() {
         ActivityScenario.launch(AddMedicamentActivity::class.java)
         onView(withId(R.id.spinner_dosage)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun testPresenceBoutonSuivant(){
+    fun testPresenceBoutonSuivant() {
         ActivityScenario.launch(AddMedicamentActivity::class.java)
         onView(withId(R.id.next_button)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun testPresenceBoutonRetour(){
+    fun testPresenceBoutonRetour() {
         ActivityScenario.launch(AddMedicamentActivity::class.java)
         onView(withId(R.id.back_button)).check(matches(isDisplayed()))
     }

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mms.R
 import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.model.HourWeight
-import org.apache.xpath.operations.Bool
 
 /**
  * Adapter for the hour weight list
@@ -25,19 +24,19 @@ import org.apache.xpath.operations.Bool
  */
 class LittleTaskAdapter(
     private val context: Context,
-    private val items : MutableList<HourWeight>,
-    private val db : AppDatabase,
-    private val edit : Boolean,
-    private val taskId : Long,
-    private val dismiss : () -> Unit
+    private val items: MutableList<HourWeight>,
+    private val db: AppDatabase,
+    private val edit: Boolean,
+    private val taskId: Long,
+    private val dismiss: () -> Unit
 ) : RecyclerView.Adapter<LittleTaskAdapter.MyViewHolder>() {
 
 
     // class that represents the view holder of the recycler view
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val hour : TextView = itemView.findViewById(R.id.tv_heure)
-        val weight : TextView = itemView.findViewById(R.id.tv_nb_doses)
-        val btnDelete : Button = itemView.findViewById(R.id.btn_delete)
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val hour: TextView = itemView.findViewById(R.id.tv_heure)
+        val weight: TextView = itemView.findViewById(R.id.tv_nb_doses)
+        val btnDelete: Button = itemView.findViewById(R.id.btn_delete)
     }
 
     // function that creates the view holder
@@ -79,6 +78,7 @@ class LittleTaskAdapter(
             this.items.remove(item)
         }
     }
+
     // function that returns the number of items
     override fun getItemCount(): Int {
         return this.items.size

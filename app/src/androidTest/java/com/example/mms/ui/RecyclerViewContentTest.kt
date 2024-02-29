@@ -1,41 +1,27 @@
 package com.example.mms.ui
 
 import android.content.Context
-import android.os.Parcel
-import android.util.Log
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.ViewAssertion
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import com.example.mms.MainActivity
 import com.example.mms.database.inApp.SingletonDatabase
-import com.example.mms.model.Cycle
-import com.example.mms.model.HourWeight
-import com.example.mms.service.TasksService
-import com.example.mms.model.Task
 import com.example.mms.model.User
-import org.junit.Test
-import com.example.mms.R
+import com.example.mms.service.TasksService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.greaterThanOrEqualTo
-import java.time.LocalDateTime
+import org.junit.Test
 
 class RecyclerViewContentTest {
 
@@ -43,12 +29,27 @@ class RecyclerViewContentTest {
     private val db = SingletonDatabase.getDatabase(context)
 
     private val tasksService = TasksService(context)
+
     @Test
     fun addUser() {
-        val user = User("test", "test", "test@test.fr", "test", "test", 0, 0, true, "test", "test", "test", "test", false)
+        val user = User(
+            "test",
+            "test",
+            "test@test.fr",
+            "test",
+            "test",
+            0,
+            0,
+            true,
+            "test",
+            "test",
+            "test",
+            "test",
+            false
+        )
         try {
             db.userDao().insertUser(user)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             // Si l'utilisateur existe déjà, on ne fait rien
         }
     }
@@ -129,7 +130,11 @@ class RecyclerViewContentTest {
 
             val recyclerView = view as RecyclerView
             val adapter = recyclerView.adapter
-            assertThat("RecyclerView adapter item count", adapter?.itemCount, greaterThanOrEqualTo(expectedCount))
+            assertThat(
+                "RecyclerView adapter item count",
+                adapter?.itemCount,
+                greaterThanOrEqualTo(expectedCount)
+            )
         }
 
         companion object {

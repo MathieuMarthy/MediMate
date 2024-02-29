@@ -11,7 +11,7 @@ class ShoawbleItem(
 )
 
 @Serializable
-class SideEffects (
+class SideEffects(
     val fullInfoUrl: String,
     val posology: String?,
     val pregnancy: String?,
@@ -46,7 +46,12 @@ class SideEffects (
         }
 
         if (this.sideEffects != null) {
-            showableItems.add(ShoawbleItem(context.getString(R.string.effets_secondaires), this.sideEffects))
+            showableItems.add(
+                ShoawbleItem(
+                    context.getString(R.string.effets_secondaires),
+                    this.sideEffects
+                )
+            )
         }
 
         return showableItems

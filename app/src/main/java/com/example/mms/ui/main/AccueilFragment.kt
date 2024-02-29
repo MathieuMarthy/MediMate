@@ -69,7 +69,11 @@ class AccueilFragment : Fragment() {
         this.tasksService = TasksService(requireContext())
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ActivityCompat.requestPermissions(this.requireActivity(), arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+            ActivityCompat.requestPermissions(
+                this.requireActivity(),
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                1
+            )
         }
 
         lifecycleScope.launch {
@@ -111,8 +115,12 @@ class AccueilFragment : Fragment() {
 
         updateSmiley()
 
-        setMonthAndYear(extractMonthAndYearFromDate(this.selectedDate.toString())!!.first, extractMonthAndYearFromDate(this.selectedDate.toString())!!.second)
-        takesAdapter = TakesAdapter(root.context, items, db, this.selectedDate, root) { updateSmiley() }
+        setMonthAndYear(
+            extractMonthAndYearFromDate(this.selectedDate.toString())!!.first,
+            extractMonthAndYearFromDate(this.selectedDate.toString())!!.second
+        )
+        takesAdapter =
+            TakesAdapter(root.context, items, db, this.selectedDate, root) { updateSmiley() }
         medicinesRV.layoutManager = LinearLayoutManager(root.context)
         medicinesRV.adapter = takesAdapter
 
@@ -207,7 +215,8 @@ class AccueilFragment : Fragment() {
 
         if (!areDatesOnSameDay(now, selectedDate)) {
             binding.imageView.setImageResource(R.drawable.tres_heureux)
-            binding.textHome.text = getString(R.string.vous_aurez_medicament_prendre, numberTakesTook.second.toString())
+            binding.textHome.text =
+                getString(R.string.vous_aurez_medicament_prendre, numberTakesTook.second.toString())
             return
         }
 
@@ -226,7 +235,10 @@ class AccueilFragment : Fragment() {
                 binding.imageView.setImageResource(R.drawable.tres_heureux)
             }
             binding.textHome.text =
-                getString(R.string.vous_avez_pris_medicaments_aujourd_hui, numberTakesTook.first.toString())
+                getString(
+                    R.string.vous_avez_pris_medicaments_aujourd_hui,
+                    numberTakesTook.first.toString()
+                )
         }
     }
 

@@ -22,7 +22,7 @@ class AddMedicamentStorageFragment : Fragment() {
     private var _binding: FragmentAddMedicamentStorageBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: SharedAMViewModel
-    private lateinit var db : AppDatabase
+    private lateinit var db: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,9 +61,11 @@ class AddMedicamentStorageFragment : Fragment() {
             binding.switch1.isChecked = true
             binding.constraintLayoutStorage.getViewById(R.id.edit_alert_storage).isEnabled = true
             binding.constraintLayoutStorage.getViewById(R.id.edit_actual_storage).isEnabled = true
-            val storage = binding.constraintLayoutStorage.getViewById(R.id.edit_actual_storage) as EditText
+            val storage =
+                binding.constraintLayoutStorage.getViewById(R.id.edit_actual_storage) as EditText
             storage.setText(medicineStorage!!.storage.toString())
-            val alertValue = binding.constraintLayoutStorage.getViewById(R.id.edit_alert_storage) as EditText
+            val alertValue =
+                binding.constraintLayoutStorage.getViewById(R.id.edit_alert_storage) as EditText
             alertValue.setText(medicineStorage!!.alertValue.toString())
         }
 
@@ -78,12 +80,16 @@ class AddMedicamentStorageFragment : Fragment() {
             // change the style of the layout depending on the switch
             if (isChecked) {
                 binding.constraintLayoutStorage.setBackgroundColor(Color.WHITE)
-                binding.constraintLayoutStorage.getViewById(R.id.edit_alert_storage).isEnabled = true
-                binding.constraintLayoutStorage.getViewById(R.id.edit_actual_storage).isEnabled = true
+                binding.constraintLayoutStorage.getViewById(R.id.edit_alert_storage).isEnabled =
+                    true
+                binding.constraintLayoutStorage.getViewById(R.id.edit_actual_storage).isEnabled =
+                    true
             } else {
                 binding.constraintLayoutStorage.setBackgroundColor(resources.getColor(R.color.light_gray))
-                binding.constraintLayoutStorage.getViewById(R.id.edit_alert_storage).isEnabled = false
-                binding.constraintLayoutStorage.getViewById(R.id.edit_actual_storage).isEnabled = false
+                binding.constraintLayoutStorage.getViewById(R.id.edit_alert_storage).isEnabled =
+                    false
+                binding.constraintLayoutStorage.getViewById(R.id.edit_actual_storage).isEnabled =
+                    false
             }
         }
 
@@ -92,13 +98,16 @@ class AddMedicamentStorageFragment : Fragment() {
 
         binding.nextButton.setOnClickListener {
             if (binding.switch1.isChecked) {
-                val storage = binding.constraintLayoutStorage.getViewById(R.id.edit_actual_storage) as EditText
-                val alertValue = binding.constraintLayoutStorage.getViewById(R.id.edit_alert_storage) as EditText
+                val storage =
+                    binding.constraintLayoutStorage.getViewById(R.id.edit_actual_storage) as EditText
+                val alertValue =
+                    binding.constraintLayoutStorage.getViewById(R.id.edit_alert_storage) as EditText
 
                 // get the id of the medicine
-                var medicineId : Long = 0
+                var medicineId: Long = 0
                 val tt = Thread {
-                    medicineId = db.medicineDao().getMedicineIdByName(viewModel.medicineName.value!!)
+                    medicineId =
+                        db.medicineDao().getMedicineIdByName(viewModel.medicineName.value!!)
                 }
                 tt.start()
                 tt.join()

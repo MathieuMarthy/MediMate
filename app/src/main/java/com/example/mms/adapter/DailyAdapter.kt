@@ -1,7 +1,6 @@
 package com.example.mms.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,7 @@ class DailyAdapter(
     private val context: Context,
     private val items: MutableList<DairyNote>,
     private val func: (id: Int, textValue: String, position: Int) -> Unit
-): RecyclerView.Adapter<DailyAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<DailyAdapter.MyViewHolder>() {
 
     /**
      * Class that represents the view holder of the recycler view

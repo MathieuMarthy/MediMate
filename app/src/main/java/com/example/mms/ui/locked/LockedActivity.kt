@@ -14,12 +14,12 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import com.example.mms.database.inApp.AppDatabase
-import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.MainActivity
 import com.example.mms.R
 import com.example.mms.Utils.cryptEmail
 import com.example.mms.Utils.hashString
+import com.example.mms.database.inApp.AppDatabase
+import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.ActivityLockedBinding
 
 class LockedActivity : AppCompatActivity() {
@@ -42,7 +42,11 @@ class LockedActivity : AppCompatActivity() {
 
         db = SingletonDatabase.getDatabase(this)
 
-        if (userEmail != null) { binding.userEmail.text = cryptEmail(userEmail) }else { binding.userEmail.isVisible = false }
+        if (userEmail != null) {
+            binding.userEmail.text = cryptEmail(userEmail)
+        } else {
+            binding.userEmail.isVisible = false
+        }
 
         // Biometric
         val executor = ContextCompat.getMainExecutor(this)
@@ -96,8 +100,11 @@ class LockedActivity : AppCompatActivity() {
             binding.codePin3,
             binding.codePin4
         )
-        listCodePin.forEach { it.inputType = InputType.TYPE_CLASS_NUMBER; it.filters = arrayOf<InputFilter>(
-            InputFilter.LengthFilter(1))}
+        listCodePin.forEach {
+            it.inputType = InputType.TYPE_CLASS_NUMBER; it.filters = arrayOf<InputFilter>(
+            InputFilter.LengthFilter(1)
+        )
+        }
 
         fun codePin() {
             binding.buttonDelete.setOnClickListener {
@@ -126,8 +133,7 @@ class LockedActivity : AppCompatActivity() {
             binding.buttonReturnToBiometrics.visibility = View.INVISIBLE
             binding.buttonReturnToBiometrics.isEnabled = false
             codePin()
-        }
-        else {
+        } else {
 
             // Check if biometric is available
             when (biometricManager.canAuthenticate()) {
@@ -143,6 +149,7 @@ class LockedActivity : AppCompatActivity() {
                     }
                     biometricPrompt.authenticate(promptInfo)
                 }
+
                 else -> {
                     codePin()
                 }
@@ -176,7 +183,11 @@ class LockedActivity : AppCompatActivity() {
             } else {
                 listCodePin.forEach { it.setText("") }
                 runOnUiThread {
-                    Toast.makeText(this@LockedActivity, getString(R.string.code_pin_incorrect), Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this@LockedActivity,
+                        getString(R.string.code_pin_incorrect),
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }

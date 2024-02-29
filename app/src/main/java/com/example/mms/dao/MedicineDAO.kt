@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.mms.model.medicines.MType
 import com.example.mms.model.medicines.Medicine
 
 @Dao
@@ -28,8 +27,9 @@ interface MedicineDAO {
 
     @Query("SELECT * FROM Medicine WHERE name LIKE '%' || :name || '%' LIMIT 20")
     fun getMedicinesByName(name: String): List<Medicine>
+
     @Query("SELECT code_cis FROM Medicine WHERE name = :name LIMIT 1")
-    fun getMedicineIdByName(name: String) : Long
+    fun getMedicineIdByName(name: String): Long
 
     @Query("SELECT * FROM Medicine LIMIT 1 OFFSET :offset")
     fun getOneAt(offset: Int): Medicine

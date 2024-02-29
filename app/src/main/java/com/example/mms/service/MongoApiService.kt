@@ -20,7 +20,7 @@ import kotlinx.serialization.decodeFromString
  * @property queue The queue of the requests
  * @property json The json parser
  */
-class MongoApiService private constructor(context: Context): Api(context, API_URL_MONGO) {
+class MongoApiService private constructor(context: Context) : Api(context, API_URL_MONGO) {
 
     /**
      * Get the version of the database and medicines to update if the local version is not up to date
@@ -29,7 +29,11 @@ class MongoApiService private constructor(context: Context): Api(context, API_UR
      * @param callback The callback to call when the version and medicines to update are received
      * @param callbackError The callback to call when an error occurred
      */
-    fun getMedicinesCodesToUpdate(localVersion: Int, callback: (version: MongoVersion) -> Unit, callbackError: () -> Unit) {
+    fun getMedicinesCodesToUpdate(
+        localVersion: Int,
+        callback: (version: MongoVersion) -> Unit,
+        callbackError: () -> Unit
+    ) {
         // build the request
         val stringRequest = StringRequest(
             Request.Method.GET, this.makeUrl("version/$localVersion"),

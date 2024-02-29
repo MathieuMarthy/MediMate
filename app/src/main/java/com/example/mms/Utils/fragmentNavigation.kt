@@ -9,7 +9,7 @@ import com.example.mms.R
  * @param activity
  * @param fragmentMove
  */
-fun goToInAddFragments(activity : FragmentActivity, fragmentMove: Int) {
+fun goToInAddFragments(activity: FragmentActivity, fragmentMove: Int) {
     val navHostFragment =
         activity.supportFragmentManager.findFragmentById(R.id.nav_add_medicament) as NavHostFragment
     val navController = navHostFragment.navController

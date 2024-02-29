@@ -9,7 +9,7 @@ import com.example.mms.model.Doctor
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class DoctorApiService private constructor(context: Context): Api(context, API_URL_DOCTOR) {
+class DoctorApiService private constructor(context: Context) : Api(context, API_URL_DOCTOR) {
 
     private fun getField(map: Map<String, String>, field: String): String? {
         return when (map[field]) {
@@ -19,7 +19,11 @@ class DoctorApiService private constructor(context: Context): Api(context, API_U
         }
     }
 
-    private fun getDoctor(search: String, callback: (doctors: List<Doctor>) -> Unit, callbackError: () -> Unit) {
+    private fun getDoctor(
+        search: String,
+        callback: (doctors: List<Doctor>) -> Unit,
+        callbackError: () -> Unit
+    ) {
         val url = this.makeUrl("rpps?page=1&_per_page=30&$search")
 
         // build the request
@@ -28,7 +32,10 @@ class DoctorApiService private constructor(context: Context): Api(context, API_U
             { response ->
                 try {
                     val gson = Gson()
-                    val apiResponse = gson.fromJson<Map<String, Any>>(response, object : TypeToken<Map<String, Any>>() {}.type)
+                    val apiResponse = gson.fromJson<Map<String, Any>>(
+                        response,
+                        object : TypeToken<Map<String, Any>>() {}.type
+                    )
 
                     // try to parse the response into a Doctor
                     val jsonString = apiResponse["hydra:member"]
@@ -38,7 +45,10 @@ class DoctorApiService private constructor(context: Context): Api(context, API_U
                         .replace("}]", "\"}]")
                         .replace("}\", {", "\"}, {")
 
-                    val doctorsMap = gson.fromJson<List<Map<String, String>>>(jsonString, object : TypeToken<List<Map<String, String>>>() {}.type)
+                    val doctorsMap = gson.fromJson<List<Map<String, String>>>(
+                        jsonString,
+                        object : TypeToken<List<Map<String, String>>>() {}.type
+                    )
 
                     val doctors = mutableListOf<Doctor>()
                     for (doctorMap in doctorsMap) {
@@ -78,7 +88,11 @@ class DoctorApiService private constructor(context: Context): Api(context, API_U
      * @param callback the callback to call when the request is successful
      * @param callbackError the callback to call when the request failed
      */
-    fun getDoctorByRPPS(rpps: String, callback: (doctors: List<Doctor>) -> Unit, callbackError: () -> Unit) {
+    fun getDoctorByRPPS(
+        rpps: String,
+        callback: (doctors: List<Doctor>) -> Unit,
+        callbackError: () -> Unit
+    ) {
         val searchUrl = "idRpps=$rpps"
 
         this.getDoctor(searchUrl, callback, callbackError)
@@ -92,7 +106,12 @@ class DoctorApiService private constructor(context: Context): Api(context, API_U
      * @param callback the callback to call when the request is successful
      * @param callbackError the callback to call when the request failed
      */
-    fun getDoctorByName(firstName: String, lastName: String, callback: (doctors: List<Doctor>) -> Unit, callbackError: () -> Unit) {
+    fun getDoctorByName(
+        firstName: String,
+        lastName: String,
+        callback: (doctors: List<Doctor>) -> Unit,
+        callbackError: () -> Unit
+    ) {
         var searchUrl = ""
 
         if (firstName.isNotBlank()) {

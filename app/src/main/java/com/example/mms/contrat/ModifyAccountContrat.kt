@@ -13,7 +13,7 @@ class ModifiyAccountContrat : ActivityResultContract<Void?, User>() {
     }
 
     override fun parseResult(resultCode: Int, intent: Intent?): User {
-        var res = User("","","","","",0,0,false,"","","","",false)
+        var res = User("", "", "", "", "", 0, 0, false, "", "", "", "", false)
         if (resultCode == Activity.RESULT_OK) {
             res = intent!!.getParcelableExtra("user")!!
         }

@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mms.R
 import com.example.mms.adapter.TakesAdapter
 import com.example.mms.database.inApp.SingletonDatabase
@@ -24,7 +23,7 @@ import com.google.android.material.snackbar.Snackbar
  * @property view The view of the activity
  * @property db The local database
  */
-class MedicineStorageService(val context : Context, val view : View) {
+class MedicineStorageService(val context: Context, val view: View) {
     private var db = SingletonDatabase.getDatabase(context)
 
     /**
@@ -39,7 +38,12 @@ class MedicineStorageService(val context : Context, val view : View) {
      *
      * @return true if the user dismiss the dialog, false otherwise
      */
-    fun updateMedicineStorage(medicineStorage: MedicineStorage, weight : Int, medicineName : String, takesAdapter: TakesAdapter) : Boolean {
+    fun updateMedicineStorage(
+        medicineStorage: MedicineStorage,
+        weight: Int,
+        medicineName: String,
+        takesAdapter: TakesAdapter
+    ): Boolean {
         // The storage - the weight of the takes
         val res = medicineStorage.storage - weight
         var update = false
@@ -87,7 +91,8 @@ class MedicineStorageService(val context : Context, val view : View) {
                 val snackbar = Snackbar.make(
                     view,
                     this.context.getString(R.string.stock_faible_pensez_racheter),
-                    Snackbar.LENGTH_LONG)
+                    Snackbar.LENGTH_LONG
+                )
 
                 // Add a button to dismiss the snackbar
                 snackbar.setAction("X", View.OnClickListener {
@@ -95,10 +100,12 @@ class MedicineStorageService(val context : Context, val view : View) {
                 })
 
                 // Add a button to update the storage
-                snackbar.setAction(this.context.getString(R.string.gerer_stock), View.OnClickListener {
-                    dialogGererStock(medicineStorage, medicineName, takesAdapter)
-                    snackbar.dismiss()
-                })
+                snackbar.setAction(
+                    this.context.getString(R.string.gerer_stock),
+                    View.OnClickListener {
+                        dialogGererStock(medicineStorage, medicineName, takesAdapter)
+                        snackbar.dismiss()
+                    })
 
                 // Change the color of the snackbar
                 snackbar.setBackgroundTint(context.getColor(R.color.white))

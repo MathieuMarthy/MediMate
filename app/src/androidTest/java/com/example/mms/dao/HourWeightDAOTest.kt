@@ -41,7 +41,7 @@ class HourWeightDAOTest {
     }
 
     @Test
-    fun testInsertFail(){
+    fun testInsertFail() {
         setUp()
         val hourWeight = HourWeight(10, "12:00", 70)
         hourWeightDAO.insert(hourWeight)

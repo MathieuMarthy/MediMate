@@ -62,7 +62,8 @@ class AddMedicamentJoursSpecifiquesFragment : Fragment() {
         for (numOfDay in 0..6) {
             // change the text of the button depending of the language
             val dayOfWeek = DayOfWeek.of(numOfDay + 1)
-            this.daysButtons[numOfDay].text = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
+            this.daysButtons[numOfDay].text =
+                dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
 
             // change the style
             if (numOfDay == this.selectedDay) {
@@ -82,7 +83,10 @@ class AddMedicamentJoursSpecifiquesFragment : Fragment() {
         }
 
         // Create the adapter
-        this.hourWeightAdapter = HourWeightAdapter(this.requireContext(), this.weekOfSpecificDaysService.getDay(this.selectedDay))
+        this.hourWeightAdapter = HourWeightAdapter(
+            this.requireContext(),
+            this.weekOfSpecificDaysService.getDay(this.selectedDay)
+        )
         val rvHeureDosage = binding.hourWeightListrv
         rvHeureDosage.adapter = this.hourWeightAdapter
         rvHeureDosage.layoutManager = LinearLayoutManager(this.requireContext())
@@ -106,7 +110,10 @@ class AddMedicamentJoursSpecifiquesFragment : Fragment() {
 
         binding.backButton.root.setOnClickListener {
             viewModel.clearFrequencyData()
-            goToInAddFragments(requireActivity(), R.id.action_AMPlus_JoursSpecifiques_to_AMPlus_Fragment)
+            goToInAddFragments(
+                requireActivity(),
+                R.id.action_AMPlus_JoursSpecifiques_to_AMPlus_Fragment
+            )
         }
 
         binding.nextButton.setOnClickListener {
@@ -139,7 +146,8 @@ class AddMedicamentJoursSpecifiquesFragment : Fragment() {
      * Change the recycler view depending of the selected day
      */
     private fun changeRecyclerViewDepingOnSelectedDay() {
-        this.hourWeightAdapter.hourWeightList = this.weekOfSpecificDaysService.getDay(this.selectedDay)
+        this.hourWeightAdapter.hourWeightList =
+            this.weekOfSpecificDaysService.getDay(this.selectedDay)
         this.hourWeightAdapter.notifyDataSetChanged()
     }
 
@@ -156,7 +164,12 @@ class AddMedicamentJoursSpecifiquesFragment : Fragment() {
      */
     private fun disableButton(numOfDay: Int) {
         this.daysButtons[numOfDay].setBackgroundResource(R.drawable.button_style_3_disable)
-        this.daysButtons[numOfDay].setTextColor(getColor(requireContext(), R.color.clickable_blue_disable))
+        this.daysButtons[numOfDay].setTextColor(
+            getColor(
+                requireContext(),
+                R.color.clickable_blue_disable
+            )
+        )
     }
 
     /**
@@ -168,7 +181,11 @@ class AddMedicamentJoursSpecifiquesFragment : Fragment() {
         val dialog = TimePickerDialog(
             this.requireContext(), { _, hourOfDay, minute ->
                 val hourMinuteString = hourMinuteToString(hourOfDay, minute)
-                this.weekOfSpecificDaysService.changeTime(this.selectedDay, position, hourMinuteString)
+                this.weekOfSpecificDaysService.changeTime(
+                    this.selectedDay,
+                    position,
+                    hourMinuteString
+                )
                 this.hourWeightAdapter.notifyItemChanged(position)
             }, 8, 0, true
         )

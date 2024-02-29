@@ -5,7 +5,7 @@ package com.example.mms.Utils
  * @param email email to mask
  * @return masked email
  */
-fun cryptEmail(email : String) : String{
+fun cryptEmail(email: String): String {
 
     val split = email.split("@")
     var firstPart = split[0]

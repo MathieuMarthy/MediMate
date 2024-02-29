@@ -6,9 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.example.mms.model.medicines.Medicine
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
-import java.util.Locale
 
 
 @Entity(
@@ -53,7 +51,18 @@ data class Task(
     @Ignore
     var oneTakeHourWeight: HourWeight? = null
 ) {
-    constructor() : this(0, "", LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now(),LocalDateTime.now(), 0, "", Cycle(), mutableListOf())
+    constructor() : this(
+        0,
+        "",
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        0,
+        "",
+        Cycle(),
+        mutableListOf()
+    )
 
     /**
      * The task is not empty, if the cycle is not empty, the specific days are not empty or the one take hour weight is not null

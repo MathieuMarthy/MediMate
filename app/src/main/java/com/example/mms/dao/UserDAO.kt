@@ -33,7 +33,7 @@ interface UserDAO {
     @Query("SELECT * FROM user WHERE isLinkedToBiometric = 1")
     fun getBiometricUsers(): List<User>
 
-   @Update
-   fun updateUser(user: User)
+    @Update
+    fun updateUser(user: User)
 
 }

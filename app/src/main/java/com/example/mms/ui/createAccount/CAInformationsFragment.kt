@@ -11,10 +11,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import com.example.mms.database.inApp.AppDatabase
-import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.R
 import com.example.mms.Utils.isEmailValid
+import com.example.mms.database.inApp.AppDatabase
+import com.example.mms.database.inApp.SingletonDatabase
 import com.example.mms.databinding.FragmentCreateAccountInformationsBinding
 import com.example.mms.model.User
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -92,7 +92,7 @@ class CAInformationsFragment : Fragment() {
         binding.editPoids.inputType = InputType.TYPE_CLASS_NUMBER
         binding.editPoids.filters = arrayOf(InputFilter.LengthFilter(3))
         binding.editTaille.inputType = InputType.TYPE_CLASS_NUMBER
-        binding.editTaille.filters =  arrayOf(InputFilter.LengthFilter(3))
+        binding.editTaille.filters = arrayOf(InputFilter.LengthFilter(3))
 
         binding.buttonSuivant.setOnClickListener {
             // get values from fields
@@ -117,7 +117,21 @@ class CAInformationsFragment : Fragment() {
                 val height = heightText.toInt()
 
                 // create a user object and store it in the view model
-                val user = User(name, surname, email, brithDate, sexe, weight, height, true, "", "", "", "", false)
+                val user = User(
+                    name,
+                    surname,
+                    email,
+                    brithDate,
+                    sexe,
+                    weight,
+                    height,
+                    true,
+                    "",
+                    "",
+                    "",
+                    "",
+                    false
+                )
                 viewModel.setUserData(user)
 
                 // go to next page

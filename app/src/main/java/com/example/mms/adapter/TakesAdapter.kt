@@ -2,14 +2,12 @@ package com.example.mms.adapter
 
 import android.app.Dialog
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mms.R
 import com.example.mms.Utils.areDatesOnSameDay
@@ -18,10 +16,8 @@ import com.example.mms.database.inApp.AppDatabase
 import com.example.mms.model.HourWeight
 import com.example.mms.model.ShowableHourWeight
 import com.example.mms.model.Takes
-import com.example.mms.model.Task
 import com.example.mms.service.MedicineStorageService
 import com.example.mms.service.TasksService
-import com.example.mms.ui.main.MedicamentsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDateTime
@@ -39,16 +35,16 @@ import java.util.Date
 class TakesAdapter(
     private val context: Context,
     private val items: MutableList<ShowableHourWeight>,
-    private val db : AppDatabase,
-    private val currentDate : Date,
-    private val view : View,
-    private val funUpdateSmiley : () -> Unit
+    private val db: AppDatabase,
+    private val currentDate: Date,
+    private val view: View,
+    private val funUpdateSmiley: () -> Unit
 ) :
     RecyclerView.Adapter<TakesAdapter.MyViewHolder>() {
 
     // Services
     private val tasksService = TasksService(context)
-    private val mStorageService = MedicineStorageService(context,view)
+    private val mStorageService = MedicineStorageService(context, view)
 
 
     /**
@@ -57,13 +53,14 @@ class TakesAdapter(
      */
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val taskTitle: TextView = itemView.findViewById(R.id.medicine_title)
-        val medicineImage  : ImageView = itemView.findViewById(R.id.medicine_image)
-        val medicineInformation : TextView = itemView.findViewById(R.id.medicine_information)
-        val taskTime : TextView = itemView.findViewById(R.id.medicine_home_time)
-        val timeRemaining : TextView = itemView.findViewById(R.id.medicine_home_time_remaining)
-        val buttonTaskChecked : FloatingActionButton = itemView.findViewById(R.id.medicine_home_check)
-        val tvStock : TextView = itemView.findViewById(R.id.tv_stock)
-        val stock : TextView = itemView.findViewById(R.id.stock_value)
+        val medicineImage: ImageView = itemView.findViewById(R.id.medicine_image)
+        val medicineInformation: TextView = itemView.findViewById(R.id.medicine_information)
+        val taskTime: TextView = itemView.findViewById(R.id.medicine_home_time)
+        val timeRemaining: TextView = itemView.findViewById(R.id.medicine_home_time_remaining)
+        val buttonTaskChecked: FloatingActionButton =
+            itemView.findViewById(R.id.medicine_home_check)
+        val tvStock: TextView = itemView.findViewById(R.id.tv_stock)
+        val stock: TextView = itemView.findViewById(R.id.stock_value)
     }
 
     /**
@@ -74,7 +71,7 @@ class TakesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_medicine_home, parent, false)
-        return  MyViewHolder(view)
+        return MyViewHolder(view)
     }
 
 
@@ -111,10 +108,14 @@ class TakesAdapter(
 
         // Display the remaining time
         holder.timeRemaining.text = if (hoursRemaining < 0) {
-            context.getString(R.string.dans) + (hoursRemaining * -1).toString() + " " + if (hoursRemaining == -1) context.getString(R.string.heure) else context.getString(R.string.heures)
+            context.getString(R.string.dans) + (hoursRemaining * -1).toString() + " " + if (hoursRemaining == -1) context.getString(
+                R.string.heure
+            ) else context.getString(R.string.heures)
         } else if (hoursRemaining == 0) {
             if (minutesRemaining < 0) {
-                context.getString(R.string.dans) + (minutesRemaining * -1).toString() + " " + if (minutesRemaining == -1) context.getString(R.string.minute) else context.getString(R.string.minutes)
+                context.getString(R.string.dans) + (minutesRemaining * -1).toString() + " " + if (minutesRemaining == -1) context.getString(
+                    R.string.minute
+                ) else context.getString(R.string.minutes)
             } else {
                 if (minutesRemaining == 1) {
                     context.getString(R.string.il_y_a_minute)
@@ -138,51 +139,59 @@ class TakesAdapter(
             // Know if the task is done or not (HourWeight isDone)
             var takes: Takes? = null
             val t = Thread {
-                takes = this.tasksService.getOrCreateTakes(item.hourWeight.id, LocalDateTime.now().toLocalDate().atStartOfDay())
+                takes = this.tasksService.getOrCreateTakes(
+                    item.hourWeight.id,
+                    LocalDateTime.now().toLocalDate().atStartOfDay()
+                )
             }
             t.start()
             t.join()
-                if (takes != null) {
-                    // If the task is done we change the color of the item
-                    if (takes!!.isDone) {
-                        context.run {
-                            holder.buttonTaskChecked.setImageResource(R.drawable.baseline_info_24)
-                        }
-                        holder.buttonTaskChecked.setOnClickListener {
-                            dialogDetails(item, true, position)
-                        }
-                    } else {
-                        // Else we set on click of the button buttonTaskChecked the action of validate the takes
-                        holder.buttonTaskChecked.setOnClickListener {
-                            val tt = Thread {
-                                var dismiss = false
-                                if (item.medicineStorage != null) {
-                                    dismiss = this.mStorageService.updateMedicineStorage(
-                                        item.medicineStorage,
-                                        item.hourWeight.weight,
-                                        item.medicineName,
-                                        this@TakesAdapter
-                                    )
-                                }
-                                if(!dismiss) {
-                                    db.takesDao().updateIsDone(true, item.hourWeight.id, LocalDateTime.now().toLocalDate().atStartOfDay(), LocalDateTime.now())
-                                    funUpdateSmiley()
-                                }
+            if (takes != null) {
+                // If the task is done we change the color of the item
+                if (takes!!.isDone) {
+                    context.run {
+                        holder.buttonTaskChecked.setImageResource(R.drawable.baseline_info_24)
+                    }
+                    holder.buttonTaskChecked.setOnClickListener {
+                        dialogDetails(item, true, position)
+                    }
+                } else {
+                    // Else we set on click of the button buttonTaskChecked the action of validate the takes
+                    holder.buttonTaskChecked.setOnClickListener {
+                        val tt = Thread {
+                            var dismiss = false
+                            if (item.medicineStorage != null) {
+                                dismiss = this.mStorageService.updateMedicineStorage(
+                                    item.medicineStorage,
+                                    item.hourWeight.weight,
+                                    item.medicineName,
+                                    this@TakesAdapter
+                                )
                             }
-                            tt.start()
-                            tt.join()
-                            this@TakesAdapter.notifyDataSetChanged()
+                            if (!dismiss) {
+                                db.takesDao().updateIsDone(
+                                    true,
+                                    item.hourWeight.id,
+                                    LocalDateTime.now().toLocalDate().atStartOfDay(),
+                                    LocalDateTime.now()
+                                )
+                                funUpdateSmiley()
+                            }
                         }
+                        tt.start()
+                        tt.join()
+                        this@TakesAdapter.notifyDataSetChanged()
                     }
                 }
-            } else {
-                // if the takes is not for today we change the color of the item
-                holder.itemView.setBackgroundColor(context.getColor(R.color.light_gray))
-                holder.buttonTaskChecked.setImageResource(R.drawable.baseline_info_24)
-                holder.buttonTaskChecked.setOnClickListener {
-                    dialogDetails(item, false, position)
-                }
             }
+        } else {
+            // if the takes is not for today we change the color of the item
+            holder.itemView.setBackgroundColor(context.getColor(R.color.light_gray))
+            holder.buttonTaskChecked.setImageResource(R.drawable.baseline_info_24)
+            holder.buttonTaskChecked.setOnClickListener {
+                dialogDetails(item, false, position)
+            }
+        }
         // gives the image depending on the type of medicine
         holder.medicineImage.setImageResource(getImageByMedicineType(item))
     }
@@ -191,7 +200,7 @@ class TakesAdapter(
         return this.items.size
     }
 
-    fun updateCurrentDate(newDate : Date) {
+    fun updateCurrentDate(newDate: Date) {
         this.currentDate.time = newDate.time
         this.notifyDataSetChanged()
     }
@@ -229,7 +238,7 @@ class TakesAdapter(
      * @param taked if the takes is taked
      * @param position the position of the item
      */
-    private fun dialogDetails(sHw: ShowableHourWeight, taked : Boolean = false, position: Int) {
+    private fun dialogDetails(sHw: ShowableHourWeight, taked: Boolean = false, position: Int) {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.custom_dialog_info_takes)
 
@@ -245,7 +254,7 @@ class TakesAdapter(
 
         // Dates
         val creationDate = dialog.findViewById<TextView>(R.id.creation_date)
-        creationDate.text = getFormattedDate( sHw.task.createdAt)
+        creationDate.text = getFormattedDate(sHw.task.createdAt)
         val updateDate = dialog.findViewById<TextView>(R.id.update_date)
         updateDate.text = getFormattedDate(sHw.task.updatedAt)
 
@@ -259,7 +268,7 @@ class TakesAdapter(
                 dialog.dismiss()
                 this.mStorageService.dialogGererStock(sHw.medicineStorage, sHw.medicineName, this)
             }
-        }else{
+        } else {
             tvStock.visibility = View.GONE
             stock.visibility = View.GONE
         }
@@ -272,7 +281,12 @@ class TakesAdapter(
             btnCancelTakes.setOnClickListener {
                 val tt = Thread {
                     // We update the takes
-                    db.takesDao().updateIsDone(false, sHw.hourWeight.id, LocalDateTime.now().toLocalDate().atStartOfDay(), LocalDateTime.now())
+                    db.takesDao().updateIsDone(
+                        false,
+                        sHw.hourWeight.id,
+                        LocalDateTime.now().toLocalDate().atStartOfDay(),
+                        LocalDateTime.now()
+                    )
                     // We update the smiley
                     funUpdateSmiley()
                     // We update the stock
@@ -287,7 +301,7 @@ class TakesAdapter(
                 this@TakesAdapter.notifyItemChanged(position)
                 dialog.dismiss()
             }
-        }else{
+        } else {
             // else we hide the button
             btnCancelTakes.visibility = View.GONE
         }
@@ -295,7 +309,8 @@ class TakesAdapter(
         // We bind the onClickListener of the button btnInfoTask to the action of going to the page myTasks (dashboard)
         val btnInfoTask = dialog.findViewById<TextView>(R.id.btn_info_task)
         btnInfoTask.setOnClickListener {
-            val navView = (context as AppCompatActivity).findViewById<BottomNavigationView>(R.id.nav_view)
+            val navView =
+                (context as AppCompatActivity).findViewById<BottomNavigationView>(R.id.nav_view)
             navView.selectedItemId = R.id.navigation_dashboard
             dialog.dismiss()
         }

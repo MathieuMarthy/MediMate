@@ -44,9 +44,9 @@ class UpdateNote : AppCompatActivity() {
             val saisi = binding.textNote.text.toString()
 
             val valeurRetour = Intent()
-                                .putExtra(CLE, saisi)
-                                .putExtra("id", id)
-                                .putExtra("position", position)
+                .putExtra(CLE, saisi)
+                .putExtra("id", id)
+                .putExtra("position", position)
             setResult(AppCompatActivity.RESULT_OK, valeurRetour)
             finish()
         }

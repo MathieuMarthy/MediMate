@@ -15,7 +15,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import com.example.mms.R
 import com.example.mms.constant.LIEN_EFFETS_INDESIRABLES
 import com.example.mms.database.inApp.SingletonDatabase

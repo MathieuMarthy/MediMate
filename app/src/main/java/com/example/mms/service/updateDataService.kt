@@ -38,15 +38,19 @@ class UpdateDataService(context: Context) {
         thread.join() // wait for the thread to finish
 
         // call the api to get the mongo version
-        this.mongoApiService.getMedicinesCodesToUpdate(localVersion!!.versionNumber, { mongoVersion ->
-            this.mongoVersion = mongoVersion
+        this.mongoApiService.getMedicinesCodesToUpdate(
+            localVersion!!.versionNumber,
+            { mongoVersion ->
+                this.mongoVersion = mongoVersion
 
-            if (this.mongoVersion == null) {
-                callback(false)
-            }
+                if (this.mongoVersion == null) {
+                    callback(false)
+                }
 
-            callback(this.mongoVersion!!.updated_documents_cis.isNotEmpty())
-        }, callbackError)
+                callback(this.mongoVersion!!.updated_documents_cis.isNotEmpty())
+            },
+            callbackError
+        )
     }
 
     /**
@@ -100,7 +104,8 @@ class UpdateDataService(context: Context) {
         }
 
         // get the next medicine to download
-        val actualMedicineCIS = this.mongoVersion!!.updated_documents_cis[this.nbMedicinesToDownload]
+        val actualMedicineCIS =
+            this.mongoVersion!!.updated_documents_cis[this.nbMedicinesToDownload]
 
         // call the api to get the medicine
         this.mongoApiService.getMedicine(actualMedicineCIS,

@@ -7,7 +7,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.example.mms.R
@@ -82,7 +81,8 @@ class NotifService(
         val intent = Intent(this.context, LoaderActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this.context, 3, intent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent: PendingIntent =
+            PendingIntent.getActivity(this.context, 3, intent, PendingIntent.FLAG_IMMUTABLE)
 
         // Build the notification
         val builder = NotificationCompat.Builder(this.context, this.CHANNEL_MEDI_REMINDER)
@@ -95,17 +95,24 @@ class NotifService(
         // If enough stock, we can take on the notification
         if (hasEnoughStock) {
             // Get the date of the takes
-            val dateString = dateToString(takes.date.dayOfMonth, takes.date.monthValue, takes.date.year)
+            val dateString =
+                dateToString(takes.date.dayOfMonth, takes.date.monthValue, takes.date.year)
 
             // Create an intent to take the medicine when the user clicks on the notification
-            val takeMedicineIntent = Intent(this.context, NotifTakesButtonReceiver::class.java).apply {
-                putExtra("notifId", notifId)
-                putExtra("hourWeightId", takes.hourWeightId)
-                putExtra("date", dateString)
-            }
+            val takeMedicineIntent =
+                Intent(this.context, NotifTakesButtonReceiver::class.java).apply {
+                    putExtra("notifId", notifId)
+                    putExtra("hourWeightId", takes.hourWeightId)
+                    putExtra("date", dateString)
+                }
 
             // Add the action to the notification
-            val takeMedicinePendingIntent = PendingIntent.getBroadcast(this.context, notifId, takeMedicineIntent, PendingIntent.FLAG_IMMUTABLE)
+            val takeMedicinePendingIntent = PendingIntent.getBroadcast(
+                this.context,
+                notifId,
+                takeMedicineIntent,
+                PendingIntent.FLAG_IMMUTABLE
+            )
             builder.addAction(
                 R.drawable.medicament,
                 this.context.getString(R.string.pris),
@@ -142,7 +149,10 @@ class NotifService(
      * @return True if the notification has been planified, false otherwise
      */
     @RequiresApi(Build.VERSION_CODES.S)
-    fun planifyOneNotification(showableHourWeight: ShowableHourWeight, now: LocalDateTime = LocalDateTime.now()): Boolean {
+    fun planifyOneNotification(
+        showableHourWeight: ShowableHourWeight,
+        now: LocalDateTime = LocalDateTime.now()
+    ): Boolean {
         val alarmManager = this.context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val hourMin = stringHourMinuteToInt(showableHourWeight.hourWeight.hour)
@@ -165,7 +175,12 @@ class NotifService(
             putExtra("hourWeightId", showableHourWeight.hourWeight.id)
             putExtra("hasEnoughStock", showableHourWeight.hasEnoughStock())
         }
-        val pendingIntent = PendingIntent.getBroadcast(this.context, showableHourWeight.hourWeight.id, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+        val pendingIntent = PendingIntent.getBroadcast(
+            this.context,
+            showableHourWeight.hourWeight.id,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+        )
 
         // if the device can schedule exact alarms, we planify the notification
         if (alarmManager.canScheduleExactAlarms()) {

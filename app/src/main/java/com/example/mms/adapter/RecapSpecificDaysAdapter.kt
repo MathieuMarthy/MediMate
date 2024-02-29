@@ -38,7 +38,8 @@ class RecapSpecificDaysAdapter(
      * @param viewType the view type
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_recap_specificdays, parent, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.item_recap_specificdays, parent, false)
         return MyViewHolder(view)
     }
 
@@ -49,7 +50,12 @@ class RecapSpecificDaysAdapter(
         val item = specificDaysHourWeightList[position]
 
         val dayOfWeek = DayOfWeek.of(item.day + 1)
-        holder.textDay.text = "${dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault())} ${item.hourWeight!!.hour} - ${item.hourWeight!!.weight}"
+        holder.textDay.text = "${
+            dayOfWeek.getDisplayName(
+                TextStyle.FULL,
+                Locale.getDefault()
+            )
+        } ${item.hourWeight!!.hour} - ${item.hourWeight!!.weight}"
     }
 
     /**
