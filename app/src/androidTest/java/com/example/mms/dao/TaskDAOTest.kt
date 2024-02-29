@@ -22,7 +22,7 @@ class TaskDAOTest {
     private lateinit var medicine: Medicine
 
 
-    fun setUp() {
+    private fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = SingletonDatabase.getDatabase(context)
         taskDAO = db.taskDao()

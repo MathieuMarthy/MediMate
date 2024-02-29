@@ -23,7 +23,7 @@ class OneTakeDAOTest {
     private lateinit var medicineDAO: MedicineDAO
 
 
-    fun setUp() {
+    private fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = SingletonDatabase.getDatabase(context)
         oneTakeDAO = db.oneTakeDao()

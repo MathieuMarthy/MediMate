@@ -27,7 +27,7 @@ class GetNumberOfTasksDoneTodayTests {
     private var hourWeightId3: Int = 0
 
 
-    fun setUp() {
+    private fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         tasksService = TasksService(context)
         db = SingletonDatabase.getDatabase(context)

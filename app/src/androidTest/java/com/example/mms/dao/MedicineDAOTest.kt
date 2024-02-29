@@ -13,7 +13,7 @@ class MedicineDAOTest {
     private lateinit var db: AppDatabase
     private lateinit var medicineDAO: MedicineDAO
 
-    fun setUp() {
+    private fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = SingletonDatabase.getDatabase(context)
         medicineDAO = db.medicineDao()

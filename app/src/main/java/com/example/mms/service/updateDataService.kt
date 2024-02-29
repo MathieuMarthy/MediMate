@@ -86,7 +86,7 @@ class UpdateDataService(context: Context) {
     /**
      * Check if the update is finish
      */
-    fun isFinish(): Boolean {
+    private fun isFinish(): Boolean {
         return this.nbMedicinesToDownload >= this.mongoVersion!!.updated_documents_cis.size
     }
 

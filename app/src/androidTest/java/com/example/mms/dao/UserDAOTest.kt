@@ -11,7 +11,7 @@ class UserDAOTest {
     private lateinit var db: AppDatabase
     private lateinit var userDAO: UserDAO
 
-    fun setUp() {
+    private fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = SingletonDatabase.getDatabase(context)
         userDAO = db.userDao()
@@ -63,7 +63,7 @@ class UserDAOTest {
     }
 
 
-    fun getUser1(): User {
+    private fun getUser1(): User {
         return User(
             "Doe",
             "John",
@@ -81,7 +81,7 @@ class UserDAOTest {
         )
     }
 
-    fun getUser2(): User {
+    private fun getUser2(): User {
         return User(
             "Doe",
             "Jane",

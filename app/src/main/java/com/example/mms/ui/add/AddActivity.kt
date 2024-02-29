@@ -177,7 +177,7 @@ class AddActivity : AppCompatActivity() {
         }.start()
     }
 
-    fun showRecyclerView() {
+    private fun showRecyclerView() {
         this.mediProposalsRecyclerView.visibility = RecyclerView.VISIBLE
 
         val params: ViewGroup.LayoutParams = this.mediProposalsRecyclerView.layoutParams
@@ -185,7 +185,7 @@ class AddActivity : AppCompatActivity() {
         this.mediProposalsRecyclerView.layoutParams = params
     }
 
-    fun hideRyclerclerView() {
+    private fun hideRyclerclerView() {
         this.mediProposalsRecyclerView.visibility = RecyclerView.INVISIBLE
 
         val params: ViewGroup.LayoutParams = this.mediProposalsRecyclerView.layoutParams

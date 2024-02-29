@@ -37,7 +37,7 @@ class TasksService(context: Context) {
      *
      * @return The list of tasks
      */
-    fun getCurrentUserTasks(): List<Task> {
+    private fun getCurrentUserTasks(): List<Task> {
         val currentUserId = this.db.userDao().getConnectedUser()?.email ?: return listOf()
         return this.db.taskDao().getUserTasks(currentUserId)
     }
@@ -347,7 +347,7 @@ class TasksService(context: Context) {
      *
      * @return True if the cycle need to be taken at the given date, false otherwise
      */
-    fun shouldTakeThisCycleAt(task: Task, cycle: Cycle, date: LocalDateTime): Boolean {
+    private fun shouldTakeThisCycleAt(task: Task, cycle: Cycle, date: LocalDateTime): Boolean {
         // Initialize dates
         val dateStartDay = date.toLocalDate().atStartOfDay()
         var pointerDate = task.updatedAt.toLocalDate().atStartOfDay()
@@ -421,7 +421,7 @@ class TasksService(context: Context) {
      *
      * @return True if the specific day need to be taken at the given date, false otherwise
      */
-    fun shouldTakeThisSpecificDayAt(
+    private fun shouldTakeThisSpecificDayAt(
         task: Task,
         specificDay: SpecificDaysHourWeight,
         date: LocalDateTime
@@ -438,7 +438,7 @@ class TasksService(context: Context) {
      *
      * @return A pair of Int, the first is the hour, the second is the minute
      */
-    fun getHourNextCycle(cycle: Cycle): Pair<Int, Int> {
+    private fun getHourNextCycle(cycle: Cycle): Pair<Int, Int> {
         for (hW in cycle.hourWeights) {
             // Get the hour and the minute of the hour weight
             val hour = hW.hour
@@ -643,7 +643,7 @@ class TasksService(context: Context) {
      *
      * @return The list of showable hour weights
      */
-    fun createOrGetTodaysSwHourWeight(userId: String): MutableList<ShowableHourWeight> {
+    private fun createOrGetTodaysSwHourWeight(userId: String): MutableList<ShowableHourWeight> {
         // get today's tasks
         val tasks = this.getTasksAt(userId, Date())
 

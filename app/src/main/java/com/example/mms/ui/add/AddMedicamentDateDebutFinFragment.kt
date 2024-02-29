@@ -86,7 +86,7 @@ class AddMedicamentDateDebutFinFragment : Fragment() {
      * @param start true if the EditText is for the start date, false if it's for the end date
      * @param editText2 the other EditText
      */
-    fun setupDatePickerDialog(
+    private fun setupDatePickerDialog(
         editText: EditText,
         initialDate: LocalDateTime,
         start: Boolean,

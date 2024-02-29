@@ -205,7 +205,7 @@ class TakesAdapter(
         this.notifyDataSetChanged()
     }
 
-    fun getImageByMedicineType(item: ShowableHourWeight): Int {
+    private fun getImageByMedicineType(item: ShowableHourWeight): Int {
         return when {
             "${item.medicineType.generic}" == "capsule" -> R.drawable.capsules
             "${item.medicineType.generic}" == "comprime" -> R.drawable.comprimes
@@ -223,7 +223,7 @@ class TakesAdapter(
      * @param hW the hour weight
      * @return the remaining time
      */
-    fun getHoursMinutesRemaining(hW: HourWeight): Pair<Int, Int> {
+    private fun getHoursMinutesRemaining(hW: HourWeight): Pair<Int, Int> {
         val hour = hW.hour.split(":")[0].toInt()
         return Pair(
             LocalDateTime.now().hour - hour,

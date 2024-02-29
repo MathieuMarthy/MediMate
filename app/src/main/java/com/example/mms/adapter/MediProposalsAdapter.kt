@@ -17,7 +17,7 @@ import com.example.mms.adapter.Interface.OnItemClickListener
  */
 class MediProposalsAdapter(
     private val context: Context,
-    val medicinesNames: List<String>
+    private val medicinesNames: List<String>
 ) :
     RecyclerView.Adapter<MediProposalsAdapter.MyViewHolder>() {
 

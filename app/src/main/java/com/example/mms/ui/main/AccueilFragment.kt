@@ -242,7 +242,7 @@ class AccueilFragment : Fragment() {
         }
     }
 
-    fun updateMonth(numberToAdd: Int) {
+    private fun updateMonth(numberToAdd: Int) {
         val newCalendar = Calendar.getInstance()
         newCalendar.time = stringToDate(getDaySelected().date)
         newCalendar.add(Calendar.MONTH, numberToAdd)
@@ -282,7 +282,7 @@ class AccueilFragment : Fragment() {
     }
 
 
-    fun areDatesOnSameDay(date1: Date, date2: Date): Boolean {
+    private fun areDatesOnSameDay(date1: Date, date2: Date): Boolean {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val formattedDate1 = dateFormat.format(date1)
         val formattedDate2 = dateFormat.format(date2)
@@ -290,7 +290,7 @@ class AccueilFragment : Fragment() {
         return formattedDate1 == formattedDate2
     }
 
-    fun getDaySelected(): CalendarDay {
+    private fun getDaySelected(): CalendarDay {
         return calendarDays.find { it.isSelected }!!
     }
 

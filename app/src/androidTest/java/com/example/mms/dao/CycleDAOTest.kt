@@ -20,7 +20,7 @@ class CycleDAOTest {
     private lateinit var medicineDAO: MedicineDAO
     private lateinit var db: AppDatabase
 
-    fun setUp() {
+    private fun setUp() {
         print("Setting up")
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = SingletonDatabase.getDatabase(context)
@@ -55,7 +55,7 @@ class CycleDAOTest {
         taskDAO.insert(task2)
     }
 
-    fun tearDown() {
+    private fun tearDown() {
         print("Tearing down")
         taskDAO.deleteById(1)
         userDAO.deleteUser("1")
